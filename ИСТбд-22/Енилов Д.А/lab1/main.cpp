@@ -4,26 +4,27 @@ using namespace std;
 int main()
 {
     int arr[14]={0,5,7,8,13,15,18,25,30,36,40,42,43,46};
-    int isk,numfirst=0,numlast=13,Nmiddle,flag=0;
+    int key,numfirst=0,numlast=13,numbermiddle;
+    bool flag=false;
     for(int i=0;i<14;i++){
         std::cout<<arr[i]<<" ";
     }
     std::cout <<"\nEnter searched element"<<std::endl; 
-    std::cin>>isk;
-    while(flag<1 ){
-        Nmiddle=(numfirst+numlast)/2;
-        if((numlast-numfirst==2)&&(arr[Nmiddle] != isk)){
-            flag+=1;
+    std::cin>>key;
+    while(flag==false){
+        numbermiddle=(numfirst+numlast)/2;
+        if((numlast-numfirst==2)&&(arr[numbermiddle] != key)){
+            flag=true;
         }
-        if(arr[Nmiddle]==isk){
-        std::cout<<"Number element is "<<Nmiddle;
-        flag+=1;
+        if(arr[numbermiddle]==key){
+        std::cout<<"Number element is "<<numbermiddle;
+        flag=true;
         return 0;
         }
-        if(isk>arr[Nmiddle]){
-            numfirst=Nmiddle;
+        if(key>arr[numbermiddle]){
+            numfirst=numbermiddle;
         }else{
-            numlast=Nmiddle;
+            numlast=numbermiddle;
         }
     }
     std::cout <<"Element not found";
