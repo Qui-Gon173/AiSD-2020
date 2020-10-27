@@ -15,7 +15,6 @@ int main()
         if((numlast-numfirst==2)&&(arr[Nmiddle] != isk)){
             flag+=1;
         }
-        std::cout<<Nmiddle<<" ";
         if(arr[Nmiddle]==isk){
         std::cout<<"Number element is "<<Nmiddle;
         flag+=1;
