@@ -10,11 +10,16 @@ int main()
     }
     std::cout <<"\nEnter searched element"<<std::endl; 
     std::cin>>isk;
-    while(flag<1){
+    while(flag<1 ){
         Nmiddle=(numfirst+numlast)/2;
+        if((numlast-numfirst==2)&&(arr[Nmiddle] != isk)){
+            flag+=1;
+        }
+        std::cout<<Nmiddle<<" ";
         if(arr[Nmiddle]==isk){
         std::cout<<"Number element is "<<Nmiddle;
         flag+=1;
+        return 0;
         }
         if(isk>arr[Nmiddle]){
             numfirst=Nmiddle;
@@ -22,6 +27,6 @@ int main()
             numlast=Nmiddle;
         }
     }
-    std::cout <<"\nElement not found";
-    return 0;
+    std::cout <<"Element not found";
+    
 }
