@@ -1,6 +1,5 @@
 #include <iostream>
 #include <conio.h>
-#include <windows.h>
 
 using namespace std;
 
@@ -9,6 +8,7 @@ int main()
     
     setlocale(LC_ALL, "ru-RU");
     // задаем массив и числа
+    int h = 12; // задаем размерность массива
     int mas[12]={1,2,3,4,5,6,7,8,9,10,11,12};
     int b = 0;
     //вывод массива
@@ -17,7 +17,14 @@ int main()
        cout<<mas[i]<<endl;
        cout<<"--"<<endl;
     }
-    int got = 2; // задаем переменную для поиска нужного нам числа.
+    int got = 4; // задаем переменную для поиска нужного нам числа.
+    if (got>h) // проверка от неправильного ввода числа
+    { 
+    cout<<"Задайте корректное число!"<<endl;
+    return 0;
+    }
+    else {   
+    }
     for (int i=0; i<12; i++)
     {
         if (mas[i] == got) // делаем проверку, равен ли наш массив к переменной  got
