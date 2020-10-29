@@ -32,7 +32,7 @@ int binary_Search(int my_array[], int count, int key) {
 	int left_index = 0;
 	int right_index = count;
 	int middle_index = 0;
-	while (1) {
+	while (left_index <= right_index) {
 		middle_index = (left_index + right_index) / 2;
 		if (key < my_array[middle_index]) {
 			right_index = middle_index - 1;
@@ -40,28 +40,34 @@ int binary_Search(int my_array[], int count, int key) {
 		else if (key > my_array[middle_index]) {
 			left_index = middle_index + 1;
 		}
-		else {
+		else if (key == my_array[middle_index]) {
 			return middle_index;
 		}
 	}
+	return -1;
 }
 
 int main() {
 	setlocale(LC_ALL, "Russian");
 	int my_array[100];
 	int countVar;
-	std::cout << "Êîëè÷åñòâî ïåğåìåííûõ = ";
+	std::cout << "ĞšĞ¾Ğ»Ğ¸Ñ‡ĞµÑÑ‚Ğ²Ğ¾ Ğ¿ĞµÑ€ĞµĞ¼ĞµĞ½Ğ½Ñ‹Ñ… = ";
 	std::cin >> countVar;
-	std::cout << "Çàïîëíåíèå ìàññèâà: \n";
+	std::cout << "Ğ—Ğ°Ğ¿Ğ¾Ğ»Ğ½ĞµĞ½Ğ¸Ğµ Ğ¼Ğ°ÑÑĞ¸Ğ²Ğ°: \n";
 	filling_Array(my_array, countVar);
 	int key;
-	std::cout << "Íàéòè ÷èñëî ";
-	std::cin >> key; 
-	std::cout << "\n" << "Ïåğâîíà÷àëüíûé ìàññèâ" << "\n";	
+	std::cout << "ĞĞ°Ğ¹Ñ‚Ğ¸ Ñ‡Ğ¸ÑĞ»Ğ¾ ";
+	std::cin >> key;
+	std::cout << "\n" << "ĞŸĞµÑ€Ğ²Ğ¾Ğ½Ğ°Ñ‡Ğ°Ğ»ÑŒĞ½Ñ‹Ğ¹ Ğ¼Ğ°ÑÑĞ¸Ğ²" << "\n";
 	cout_Array(my_array, countVar);
 	insert_Sort(my_array, countVar);
-	std::cout << "Îòñîğòèğîâàííûé ìàññèâ" << "\n";
+	std::cout << "ĞÑ‚ÑĞ¾Ñ€Ñ‚Ğ¸Ñ€Ğ¾Ğ²Ğ°Ğ½Ğ½Ñ‹Ğ¹ Ğ¼Ğ°ÑÑĞ¸Ğ²" << "\n";
 	cout_Array(my_array, countVar);
-	std::cout << "Èíäåêñ íàéäåííîãî ÷èñëà " << binary_Search(my_array, countVar, key);
+	if (binary_Search(my_array, countVar, key) == -1) {
+		std::cout << "Ğ˜ÑĞºĞ¾Ğ¼Ğ¾Ğ³Ğ¾ ÑĞ»ĞµĞ¼ĞµĞ½Ñ‚Ğ° Ğ½ĞµÑ‚!";
+	}
+	else {
+		std::cout << "Ğ˜Ğ½Ğ´ĞµĞºÑ Ğ½Ğ°Ğ¹Ğ´ĞµĞ½Ğ½Ğ¾Ğ³Ğ¾ Ñ‡Ğ¸ÑĞ»Ğ° " << binary_Search(my_array, countVar, key);
+	}
 	return 0;
 }
