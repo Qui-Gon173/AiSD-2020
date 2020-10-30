@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1603961139 source:e:\studing\Курс 2\Алгоритмы и структуры данных\labs\ИСТбд-21\Логинов Н.В\lab1\main.cpp
+	<iostream>
+	<time.h>
+	<string>
+	<algorithm>
+
