@@ -12,6 +12,7 @@ void SortOfHoar(int *arr,int first, int last)
     opornii=last;
     opposite=first;
     }
+    //while(opornii!=opposite){
         if((opornii<opposite)){
             conteiner=arr[opornii];//Перемещаем контейнеры
             arr[opornii]=arr[opposite];
@@ -42,25 +43,27 @@ void SortOfHoar(int *arr,int first, int last)
                 opornii=i;
                 }
             }
-            for(int b=0;b<8;b++){
+            for(int b=0;b<13;b++){
                 std::cout<<arr[b]<<" ";
             }
             std::cout<<"\n";
         }
+        std::cout<<"\n"<<"Opornii element "<<opornii;
         if(first<opornii-1)SortOfHoar(arr,first,opornii-1);
         if(opornii+1<last)SortOfHoar(arr,opornii+1,last);
+        //opornii=opposite;}
 }
 int main()
-{
-    int ar[8]={9,6,3,4,10,8,2,7};
-    int i;
+{//9,6,3,4,10,8,2,7
+    int ar[13]={16,14,2,6,17,15,13,4,7,8,9,10,3};
+    int i,conteiner,opornii=0;
     int *uk=&ar[0];
-    for(i=0;i<8;i++){
+    for(i=0;i<13;i++){
         std::cout<<ar[i]<<" ";
     }
     std::cout<<"\n";
-    SortOfHoar(uk,0,7);
-    for(i=0;i<8;i++){
+    SortOfHoar(uk,0,12);
+    for(i=0;i<13;i++){
         std::cout<<ar[i]<<" ";
     }
 }
