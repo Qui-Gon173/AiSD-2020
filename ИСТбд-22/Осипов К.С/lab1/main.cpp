@@ -6,38 +6,38 @@
 
 using namespace std;
 
-void BubbleSort(int *x, int size)
+void BubbleSort(int *arr, int size)
 {
     int tmp;
     for (int i = size - 1; i > 0; i--)
     {
         for (int j = 0; j < i; j++)
         {
-            if (x[j] > x[j + 1])
+            if (arr[j] > arr[j + 1])
             {
-                tmp = x[j];
-                x[j] = x[j + 1];
-                x[j + 1] = tmp;
+                tmp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = tmp;
             }
         }
     }
     cout << "Sorted array\n\n";
     for (int i = 0; i < size; i++)
-        cout << x[i] << " ";
+        cout << arr[i] << " ";
     cout << endl << endl;
 }
 
-int BinarySearch(int *x, int size, int key)
+int BinarySearch(int *arr, int size, int key)
 {
-    BubbleSort(x, size);
+    BubbleSort(arr, size);
     bool found = false;
     int upBorder = size - 1, lowBorder = 0;
     int middle = (upBorder + lowBorder) / 2;
     while (!found && upBorder >= lowBorder)
     {
-        if (key == x[middle])
+        if (key == arr[middle])
             found = true;
-        else if (key < x[middle])
+        else if (key < arr[middle])
             upBorder = middle - 1;
         else
             lowBorder = middle + 1;
