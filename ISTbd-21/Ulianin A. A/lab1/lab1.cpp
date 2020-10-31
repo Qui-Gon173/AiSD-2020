@@ -1,16 +1,31 @@
 #include <iostream>
-
+#include <clocale>
 using namespace std;
 
 int main()
 {
+    setlocale(LC_ALL, "ru");
+    int lengthArray; // длина массива
+
+    cout << "Введите количество элементов массива: ";
+    cin >> lengthArray;
+
     /// текущий массив
-    int currentArray[] = {-1, 2, 5, 3, -3, 5, 12, 9, 0, 6};
+    int* currentArray = (int*)malloc(lengthArray * sizeof(int)); // выделение памяти
 
-    int key = 9;          // инициализация "барьера" с установлением значения
-    int lengthArray = 10; // длина массива
+    int key;          // инициализация "барьера"
 
-    /// проверка последнего элемента на 'барьер'
+    for (int i = 0; i < lengthArray; i++)
+    {
+        cout << "Введите элемент массива: ";
+        cin >> currentArray[i];
+        
+    }
+
+    cout << "Введите значение барьера: ";
+    cin >> key;
+
+     /// проверка последнего элемента на 'барьер'
     if (currentArray[lengthArray - 1] == key)
     {
         cout << "Последний элемент равен значению барьера. Его Индекс =  " << (lengthArray - 1) << endl;
@@ -37,4 +52,8 @@ int main()
     {
         cout << "Такого элемента не нашлось!" << endl;
     }
+
+    free(currentArray); // освобождение памяти
+    return 0;
 }
+
