@@ -1,6 +1,13 @@
 #include <iostream>
 using namespace std;
-void LinSearch() {
+int LinSearch(int *x, int k, int key) {
+	int i;
+	for ( i = 0; i < k; i++) 
+		if (x[i] == key)
+			break;	
+	return i < k ? i : -1;
+}
+int main() {
 	int n;
 	cout << "Enter the size of the array:" << endl;
 	cin >> n;
@@ -15,19 +22,8 @@ void LinSearch() {
 	int num;
 	cout << "Enter the number you want to find:" << endl;
 	cin >> num;
-	int i = 0;
-	bool flag = false;
-	for (i = 0; i < n; i++) {
-		if (arr[i] == num)
-		{
-			flag = true;
-			cout << "The element is in the " << i + 1 << " position" << endl;
-			break;
-		}
-	}
-	if (flag == false) cout << "Element not found" << endl;
-}
-int main() {
-	LinSearch();
+	int result = LinSearch(arr, n, num);
+	if (result ==-1) cout << "Element not found" << endl;
+	else cout << "The element is in the " <<result +1 << " position" << endl;
 	return 0;
 }
