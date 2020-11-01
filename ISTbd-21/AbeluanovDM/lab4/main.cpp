@@ -9,8 +9,8 @@ int main() {
 	std::cout << std::endl;
 	
 	for (int j = 0; j < 10; j++) {
-		for (int i = 10 / 2 -1 - j / 2; i > -1; i--) {
-			if (2 * i + 2 <= 10 - 1-j) {
+		for (int i = 10 / 2 - 1 - j / 2; i > - 1; i--) {
+			if (2 * i + 2 <= 10 - 1 - j) {
 				if (array[2 * i + 1] > array[2 * i + 2]) {
 					if (array[i] < array[2 * i + 1]) {
 						int temp = array[i];
