@@ -3,8 +3,15 @@
 
 
 template<typename T>
-void partition(T array[], size_t& i, size_t& j) {
-    T pivot = array[j];
+void quicksort(T array[], size_t left, size_t right) {
+    if (left > right) {
+        return;
+    }
+
+    size_t i = left;
+    size_t j = right;
+
+    T pivot = array[i + (j - i) / 2];
 
     while (i <= j) {
         while (array[i] < pivot) {
@@ -16,19 +23,12 @@ void partition(T array[], size_t& i, size_t& j) {
         if (i <= j) {
             std::swap(array[i], array[j]);
             i++;
+            if (!j) {
+                break;
+            }
             j--;
         }
     }
-}
-
-
-template<typename T>
-void quicksort(T array[], size_t left, size_t right)
-{
-    size_t i = left;
-    size_t j = right;
-    
-    partition(array, i, j);
 
     if (j > left)
         quicksort(array, left, j);
