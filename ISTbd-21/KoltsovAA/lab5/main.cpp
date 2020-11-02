@@ -2,33 +2,37 @@
 #include <utility>
 
 template<typename T>
-void merge_sort(T array[], T buffer[], size_t left, size_t right) {
-    if (right <= left) {
+void merge_sort(T array[], T buffer[], size_t left_wall, size_t right_wall) {
+    if (right_wall <= left_wall) {
         return;
     }
 
-    size_t middle = left + (right - left) / 2;
-    merge_sort(array, buffer, left, middle);
-    merge_sort(array, buffer, middle + 1, right);
+    size_t middle = left_wall + (right_wall - left_wall) / 2;
+    merge_sort(array, buffer, left_wall, middle);
+    merge_sort(array, buffer, middle + 1, right_wall);
 
-    size_t current_left_index = left;
-    size_t current_right_index = middle + 1;
-    for (size_t current_buffer_index = left; current_buffer_index <= right; current_buffer_index++) {
-        if (current_left_index > middle) {
-            buffer[current_buffer_index] = array[current_right_index++];
-        } else if (current_right_index > right) {
-            buffer[current_buffer_index] = array[current_left_index++];
+    size_t left = left_wall;
+    size_t right = middle + 1;
+    for (size_t buffe_index = left_wall;
+         buff_index <= right_wall; buff_index++) {
+
+        if (left > middle) {
+            buffer[buff_index] = array[right++];
+        } else if (right > right_wall) {
+            buffer[buff_index] = array[left++];
         } else {
-            if (array[current_left_index] < array[current_right_index]) {
-                buffer[current_buffer_index] = array[current_left_index++];
+            if (array[left] < array[right]) {
+                buffer[buff_index] = array[left++];
             } else {
-                buffer[current_buffer_index] = array[current_right_index++];
+                buffer[buff_index] = array[right++];
             }
         }
     }
 
-    for (size_t current_buffer_index = left; current_buffer_index <= right; current_buffer_index++) {
-        array[current_buffer_index] = buffer[current_buffer_index];
+    for (size_t buff_index = left_wall;
+        buff_index <= right_wall; buff_index++) {
+
+        array[buff_index] = buffer[buff_index];
     }
 }
 
