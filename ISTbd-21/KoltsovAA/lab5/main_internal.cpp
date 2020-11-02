@@ -1,6 +1,7 @@
 #include <iostream>
 #include <utility>
 
+
 template<typename T>
 void merge_sort(T array[], T buffer[], size_t left_wall, size_t right_wall) {
     if (right_wall <= left_wall) {
