@@ -25,7 +25,7 @@ void print_Array(int array[], int nVar)
 void bubble_Sort(int array[], int nVar)
 {
     int i, j, temp;
-    for (i = 0; i < nVar; i++)
+    for (i = 0; i < nVar - 1; i++)
         for (j = 0; j < nVar - 1; j++)
             if (array[j] > array[j + 1])
             {
