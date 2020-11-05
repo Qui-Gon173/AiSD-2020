@@ -28,19 +28,19 @@ int main()
     int arr[lengthArr];
     int key;
     int index;
-    cout << "Ââåäèòå ÷èñëà ïî âîçðàñòàíèþ èëè óáûâàíèþ äëÿ çàïîëíåíèÿ ìàññèâà: " << endl;
+    cout << "Введите числа по возрастанию или убыванию для заполнения массива: " << endl;
 
   for (int i = 0; i < lengthArr; i++) {
     cin >> arr[i];
   }
-  cout << endl << "Ââåäèòå êëþ÷: ";
+  cout << endl << "Введите ключ: ";
   cin >> key;
 
 
   index = BinarySearch(arr,lengthArr,key);
 
-  if (index>=0) cout << "Èíäåêñ èñêîìîãî ýëåìåíòà " << index <<  endl;
-  else cout << "Èçâèíèòå, íî òàêîãî ýëåìåíòà â ìàññèâå íåò"<<endl;
+  if (index>=0) cout << "Индекс искомого элемента " << index <<  endl;
+  else cout << "Извините, но такого элемента в массиве нет"<<endl;
 
     return 0;
 }
