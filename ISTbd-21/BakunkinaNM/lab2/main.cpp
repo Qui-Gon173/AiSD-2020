@@ -20,11 +20,15 @@ void insertionSort(int arr[], int size)
 
 int main()
 {
-    const int size = 10;
-    int arr[size] = {5, 2, 7, 2, -20, 6, 1, 2, 3, 4};
+    int size;
+    int arr[1000];
+
+    cout << "size (< 1000): ";
+    cin >> size;
+    cout << "array: ";
     for (int i = 0; i < size; i++)
     {
-        cout << arr[i] << " ";
+        cin >> arr[i];
     }
     cout << endl;
     
