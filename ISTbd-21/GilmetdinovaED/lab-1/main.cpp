@@ -23,24 +23,24 @@ int main()
 {
      setlocale(LC_ALL, "rus");
      int lengthArr;
-     cout<< "Ââåäèòå äëèíó ìàññèâà "<< endl;
+     cout<< "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð»Ð¸Ð½Ñƒ Ð¼Ð°ÑÑÐ¸Ð²Ð° "<< endl;
      cin>> lengthArr;
     int arr[lengthArr];
     int key;
     int index;
-    cout << "Ââåäèòå ÷èñëà ïî âîçðàñòàíèþ èëè óáûâàíèþ äëÿ çàïîëíåíèÿ ìàññèâà: " << endl;
+    cout << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ Ã·Ã¨Ã±Ã«Ã  Ã¯Ã® Ã¢Ã®Ã§Ã°Ã Ã±Ã²Ã Ã­Ã¨Ã¾ Ã¨Ã«Ã¨ Ã³Ã¡Ã»Ã¢Ã Ã­Ã¨Ã¾ Ã¤Ã«Ã¿ Ã§Ã Ã¯Ã®Ã«Ã­Ã¥Ã­Ã¨Ã¿ Ã¬Ã Ã±Ã±Ã¨Ã¢Ã : " << endl;
 
   for (int i = 0; i < lengthArr; i++) {
     cin >> arr[i];
   }
-  cout << endl << "Ââåäèòå êëþ÷: ";
+  cout << endl << "Ã‚Ã¢Ã¥Ã¤Ã¨Ã²Ã¥ ÃªÃ«Ã¾Ã·: ";
   cin >> key;
 
 
   index = BinarySearch(arr,lengthArr,key);
 
-  if (index>=0) cout << "Èíäåêñ èñêîìîãî ýëåìåíòà " << index <<  endl;
-  else cout << "Èçâèíèòå, íî òàêîãî ýëåìåíòà â ìàññèâå íåò"<<endl;
+  if (index>=0) cout << "ÃˆÃ­Ã¤Ã¥ÃªÃ± Ã¨Ã±ÃªÃ®Ã¬Ã®Ã£Ã® Ã½Ã«Ã¥Ã¬Ã¥Ã­Ã²Ã  " << index <<  endl;
+  else cout << "ÃˆÃ§Ã¢Ã¨Ã­Ã¨Ã²Ã¥, Ã­Ã® Ã²Ã ÃªÃ®Ã£Ã® Ã½Ã«Ã¥Ã¬Ã¥Ã­Ã²Ã  Ã¢ Ã¬Ã Ã±Ã±Ã¨Ã¢Ã¥ Ã­Ã¥Ã²"<<endl;
 
     return 0;
 }
