@@ -13,6 +13,20 @@ private:
     T* array;
     size_t length = 0;
     size_t allocated_length;
+
+    void manage_size() {
+        if (this->length < this->allocated_length) {
+            return;
+        }
+
+        this->allocated_length *= RESIZE_COEFFICIENT;
+        T* new_array = new T[allocated_length];
+        for (size_t i = 0; i < this->length; i++) {
+            new_array[i] = this->array[i];
+        }
+        delete[] this->array;
+        this->array = new_array;
+    }
 public:
     Vector(size_t length = DEFAULT_ALLOCATED_LENGTH) : allocated_length(length) {
         this->array = new T[length];
@@ -39,27 +53,13 @@ public:
         return NOT_FOUND_INDEX;
     }
 
-    void manage_size() {
-        if (this->length < this->allocated_length) {
-            return;
-        }
-
-        this->allocated_length *= RESIZE_COEFFICIENT;
-        T* new_array = new T[allocated_length];
-        for (size_t i = 0; i < this->length; i++) {
-            new_array[i] = this->array[i];
-        }
-        delete[] this->array;
-        this->array = new_array;
-    }
-
     void append(T element) {
-        manage_size();
+        this->manage_size();
         this->array[length++] = element;
     }
 
     void insert(size_t position, T element) {
-        manage_size();
+        this->manage_size();
 
         if (position >= this->length) {
             this->append(element);
