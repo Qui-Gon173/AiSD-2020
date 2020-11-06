@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 
 
 const size_t DEFAULT_ALLOCATED_LENGTH = 32;
@@ -23,6 +24,10 @@ public:
 
     T operator[](size_t index) {
         return this->array[index];
+    }
+
+    size_t len() const {
+        return this->length;
     }
 
     size_t index(T element) {
@@ -87,5 +92,41 @@ public:
             std::cout << array[i] << ", ";
         }
         std::cout << array[i] << "]" << std::endl;
+    }
+
+    void clear() {
+        this->length = 0;
+    }
+
+    T get_sum() {
+        T counter = 0;
+        for (size_t i = 0; i < this->length; i++) {
+            counter += this->array[i];
+        }
+        return counter;
+    }
+
+    T get_average() {
+        return this->length ? this->get_sum() / this->length : 0;
+    }
+
+    T get_min() {
+        T min_value = std::numeric_limits<T>::max();
+        for (size_t i = 0; i < this->length; i++) {
+            if (array[i] < min_value) {
+                min_value = array[i];
+            }
+        }
+        return min_value;
+    }
+
+    T get_max() {
+        T max_value = std::numeric_limits<T>::lowest();
+        for (size_t i = 0; i < this->length; i++) {
+            if (array[i] > max_value) {
+                max_value = array[i];
+            }
+        }
+        return max_value;
     }
 };

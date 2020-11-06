@@ -21,6 +21,14 @@ int main() {
     vector.repr();  // [0, 2, -10, 3, 4]
     std::cout << vector[2] << std::endl;  // -10
     std::cout << vector.index(3) << std::endl;  // 3
+
+    std::cout << "len = " << vector.len() << std::endl;
+    std::cout << "sum = " << vector.get_sum() << std::endl;
+    std::cout << "average = " << vector.get_average() << std::endl;
+    std::cout << "min = " << vector.get_min() << std::endl;
+    std::cout << "max = " << vector.get_max() << std::endl;
+    vector.clear();
+    std::cout << "len after clear() = " << vector.len() << std::endl;
     
     return 0;
 }
