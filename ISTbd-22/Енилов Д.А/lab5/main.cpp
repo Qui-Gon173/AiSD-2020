@@ -4,76 +4,109 @@
 
 using namespace std;
 
-void MergeSort(int *arr, int number_left, int number_right)
-{
+void Simple_Merging_Sort (char *name){ 
 
-    //нужен массив-хранилище
-    int arr_conteiner[20];
-    if (number_left == number_right) {
-        return;//если левая граница совпадает с правой, то мы дошли до массива в 1 элемент
+    int i,j;
+    FILE *f,*f1,*f2;//указатели на потоки данных
+    int count_elements=0;//количество элементов
+    int value1=0,value2=0;//хранилища для десятичных чисел
+    int counter;//счетчик-предел
+    if ( (f = fopen(name,"r")) == NULL )//Открыли файл чтобы посчитать количество элементов
+    printf("\nERROR, file not found");
+    else 
+    {//узнаем количество элементов в потоке данных
+    while ( !feof(f) ) {
+      fscanf(f,"%d",&value1);
+      count_elements++;
     }
-    //находим центр
-    int middle = (number_left + number_right) / 2;
-
-    //рекурсивно повторяем алгоритм, сместив границы
-    MergeSort(arr, number_left, middle);
-    MergeSort(arr, middle + 1, number_right);
-
-
-    int l_cur = number_left, r_cur = middle + 1;
-    //прогоняем цикл для всех элементов массива контейнера от нуля до правой границы
-    for (int step = 0; step <= number_right; step++)
-    {//в массив хранилище сначала выбираются и записываются меньшие элементы из пар, четверок и т д
-    //если текущий правый элемент больше текущего левого, то все нормально, записываем так, если нет записываем сначала правый, ибо он больше
-    //если правый текущий больше правого в общем, то уже нет смысла сравнивать кто больше, так как остались лишь элементы слева
-        if ((r_cur>number_right)||((l_cur<=middle)&&(arr[l_cur]<arr[r_cur])))
-        {
-            arr_conteiner[step]=arr[l_cur];
-            l_cur++;
-        }
-        else 
-        {
-            arr_conteiner[step] = arr[r_cur];
-            r_cur++;
-        }
+    fclose(f);//Вежливо плавно закрываем файл за собой
     }
-    //результат записываем в основной массив
-    for(int step=0;step<number_right-number_left+1;step++)
-    arr[number_left+step]=arr_conteiner[step];
-}
 
+    counter=1;
+    while(counter<count_elements){//пока счетчик меньше количества файлов
+        f=fopen(name,"r");//вновь открываем наш файл
+        f1=fopen("smsort_1","w");//открываем вспомогательный файл1
+        f2=fopen("smsort_2","w");//открываем вспомогательный файл2
+
+        if(!feof(f))//если файл не закончился
+        fscanf(f,"%d",&value1);//считываем десятичное число из f в value
+        //ФАЗА РАСПРЕДЕЛЕНИЯ
+        //Далее мы расфасовываем элементы по вспомогательным файлам
+        while(!feof(f)){//пока файл не закончился
+            for(i=0;i<counter&&!feof(f);i++){//повторяем counter раз
+            fprintf(f1,"%d ",value1);//помещаем value в f1 
+            fscanf(f,"%d",&value1);//помещаем десятичное число из f1 в value
+            }
+            for(j=0;j<counter&&!feof(f);j++){//повторяем counter раз
+            fprintf(f2,"%d ",value1);//помещаем value в f2 
+            fscanf(f,"%d",&value1);//помещаем десятичное число из f1 в value
+            }
+        }
+        fclose(f1);//вежливо закрываем все ранее открытые файлы
+        fclose(f2);
+        fclose(f);
+        //ФАЗА2 СЛИЯНИЕ
+        //снова их открываем
+        //Теперь мы будем редактировать исходный файл, просто просматривая дополнительные файлы
+        f=fopen(name,"w");
+        f1=fopen("smsort_1","r");
+        f2=fopen("smsort_2","r");
+
+        if(!feof(f1))//если файл1 не закончился
+        fscanf(f1,"%d",&value1);//помещаем десятичное число из файла1 в value
+
+        if(!feof(f2))//если файл2 не закончился
+        fscanf(f2,"%d",&value2);//помещаем десятичное число из файла2 в value2
+
+        while(!feof(f1)&&!feof(f2)){//пока один из файлов не закончится
+            i=0,j=0;//номера рассматриваемых элементов
+            while(i<counter&&j<counter&&!feof(f1)&&!feof(f2)){//пока i и j меньше счетчика
+                if(value1<value2){//если десятичное число "слева"(в левом файле) меньше числа "справа"(в правом файле),
+                //то все отлично
+                    fprintf(f,"%d ",value1);//записываем в файл меньшее, value("левое число")
+                    fscanf(f1,"%d",&value1);//движемся вправо в файле1
+                    i++;//смена номера, мы ведь двинулись направо 
+                }
+                else
+                {//если десятичное число слева больше, чем справа, то это совершенно нам не подходит
+                //поэтому 
+                    fprintf(f,"%d ",value2);//записываем в файл меньшее, value2("правое число")
+                    fscanf(f2,"%d",&value2);//движемся вправо в файле2
+                    j++;//смена номера, мы ведь двинулись направо
+                }
+            }//после того как исчерпались значения "левого" или "правого" файла, 
+            //надо записать оставшееся значение, ну или значения, зависит от ситуации в файл
+            while(i<counter&&!feof(f1)){//пока номер "левых" элементов не уткнулся в потолок
+                fprintf(f,"%d ",value1);//выводим значение из value в файл
+                fscanf(f1,"%d",&value1);//принимаем в value следующее значение из f1
+                i++;
+            }
+            while(j<counter&&!feof(f2)){//пока номер "правых" элементов не уткнулся в потлок
+                fprintf(f,"%d ",value2);//выводим значение из value2 в файл
+                fscanf(f2,"%d",&value2);//принимаем в value2 след. значение из f2
+                j++;
+            }
+        }
+        //просто забираем все значения в файл из доп.файлов, страховка?
+        while(!feof(f1)){// видимо контрольный забор
+            fprintf(f,"%d ",value1);
+            fscanf(f1,"%d",&value1);
+        }
+        while(!feof(f2)){
+            fprintf(f,"%d ",value2);
+            fscanf(f2,"%d",&value2);
+        }
+        fclose(f);
+        fclose(f1);
+        fclose(f2);
+        counter *= 2;//так как мы сформировали упорядоченные пары, четверки...и.т.д. увеличиваем предел в 2 раза
+    }
+    remove("smsort_1");//уничтожаем ненужные файлы
+    remove("smsort_2");
+ }
 int main()
-{   
-    //указатель на поток
-    FILE* file=fopen("file.txt","r");
-    if(file==0){return 1;};
-    int value,counter=0;
-    //здесь мы узнаем сколько чисел в массиве будет
-    while(true){
-        if(fscanf(file,"%d",&value)==1)
-        counter++;
-        if(feof(file))
-        break;
-    }
-    int size=counter;
-    //создание массива под считанные числа, выделяем блок памяти ивозвращаем указатель на начало блока
-    int* array_in=(int*)malloc(sizeof(int)*size);
-    //установка указателя чтения на начало файла
-    fseek(file,0,SEEK_SET);
-    //проходим по файлу еще раз, теперь считывая в созданный массив значения
-    for (int i = 0; i < size; ++i) {
-    fscanf(file, "%d", &array_in[i]);
-    } 
-    int *uk=&array_in[0];
-    for(int i=0;i<size;i++)
-    std::cout<<array_in[i]<<" ";
-    MergeSort(uk,0,size-1);
-    std::cout<<"\n";
-    for(int i=0;i<size;i++)
-    std::cout<<array_in[i]<<" ";
-    //Кусочек, записывающий вместо исходного массива отсортированный
-    //ofstream object;
-    //object.open("file.txt");
-    //for(int i=0;i<size;i++)
-    //object<<array_in[i]<<" ";
+{
+    Simple_Merging_Sort ("file.txt");
+    return 0;
 }
+   
