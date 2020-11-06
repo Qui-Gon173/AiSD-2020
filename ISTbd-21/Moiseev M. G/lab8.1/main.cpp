@@ -6,8 +6,9 @@ int main() {
     double a[6] = { 10, 20, 30, 80, 23, 29 };
     stack.pushSev(a, sizeof(a) / sizeof(*a));
     stack.push(20);
-    std::cout << "After adding:" << std::endl;
+    std::cout << "After adding: " << std::endl;
     stack.printStack();
+    std::cout << "Sum: " << stack.sum() << " Average: " << stack.average() << " Min: " << stack.min() << " Max: " << stack.max() << std::endl;
     double* arr = new double[2];
     arr = stack.popSev(3);
     std::cout << "After extraction:" << std::endl;

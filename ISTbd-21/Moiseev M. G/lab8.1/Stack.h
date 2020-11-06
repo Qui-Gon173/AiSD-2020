@@ -26,7 +26,7 @@ public:
     void pushFromDifStack(Stack<T>&, int); // Функция вставки в новый экземпляр значений из другого стека
     T* popSev(int);
     T sum();
-    T abs();
+    T average();
     T min();
     T max();
 };
@@ -163,21 +163,35 @@ T Stack<T>::pop()
 }
 
 template <typename T>
-T Stack<T>::sum(const T& value){
-
+T Stack<T>::sum() {
+    T summary = 0;
+    for (size_t i = 0; i < this->getTop(); i++) {
+        summary += stackPtr[i];
+    }
+    return summary;
 }
 
 template <typename T>
-T Stack<T>::abs(const T& value){
-
+T Stack<T>::average() {
+    return this->getTop() ? this->sum() / this->getTop() : 0;
 }
 
 template <typename T>
-T Stack<T>::min(const T& value){
-
+T Stack<T>::min() {
+    assert(top > 0);
+    T min = stackPtr[0];
+    for (size_t i = 0; i < this->getTop(); i++) {
+        if (min > stackPtr[i]) min = stackPtr[i];
+    }
+    return min;
 }
 
 template <typename T>
-T Stack<T>::max(const T& value){
-    
+T Stack<T>::max() {
+    assert(top > 0);
+    T max = stackPtr[0];
+    for (size_t i = 0; i < this->getTop(); i++) {
+        if (max < stackPtr[i]) max = stackPtr[i];
+    }
+    return max;
 }
