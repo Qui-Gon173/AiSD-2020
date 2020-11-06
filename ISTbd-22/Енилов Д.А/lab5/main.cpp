@@ -19,7 +19,7 @@ void Simple_Merging_Sort (char *name){
       fscanf(f,"%d",&value1);
       count_elements++;
     }
-    fclose(f);//Вежливо плавно закрываем файл за собой
+    fclose(f);//закрываем файл за собой
     }
 
     counter=1;
@@ -42,7 +42,7 @@ void Simple_Merging_Sort (char *name){
             fscanf(f,"%d",&value1);//помещаем десятичное число из f1 в value
             }
         }
-        fclose(f1);//вежливо закрываем все ранее открытые файлы
+        fclose(f1);//закрываем все ранее открытые файлы
         fclose(f2);
         fclose(f);
         //ФАЗА2 СЛИЯНИЕ
@@ -87,7 +87,7 @@ void Simple_Merging_Sort (char *name){
                 j++;
             }
         }
-        //просто забираем все значения в файл из доп.файлов, страховка?
+        //просто забираем все значения в файл из доп.файлов
         while(!feof(f1)){// видимо контрольный забор
             fprintf(f,"%d ",value1);
             fscanf(f1,"%d",&value1);
