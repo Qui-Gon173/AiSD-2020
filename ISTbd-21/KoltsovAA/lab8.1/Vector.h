@@ -34,10 +34,6 @@ public:
         return NOT_FOUND_INDEX;
     }
 
-    size_t len() const {
-        return this->length;
-    }
-
     void manage_size() {
         if (this->length < this->allocated_length) {
             return;
@@ -78,7 +74,7 @@ public:
             return;
         }
 
-        for (size_t i = position; i < this->length - 2; i++) {
+        for (size_t i = position; i < this->length - 1; i++) {
             this->array[i] = this->array[i + 1];
         }
         this->length--;
