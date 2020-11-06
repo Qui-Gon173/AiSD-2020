@@ -1,14 +1,3 @@
-/*  Пока без менюшки но всё же... 
-    Руководство погром-места: 
-
-    Короче, чтобы добавить элемент в конец массива - vector.supplement(значение)
-    Потом, чтобы добавить элемент по позиции - vector.insert(позиция, значение)
-    А что бы удалить элемент по позиции - vector.delete_element(позиция)
-    Чтобы найти элемент по индексу - std::cout << vector[0] << " " << vector[индекс] << std::endl;
-    Ну и наконец, чтобы найти индекс элемента - std::cout << vector.index(значение) << std::endl;
-
-    *Названия функций полная х...*
-*/
 
 #include <iostream>
 #include "Vector.h"
@@ -36,5 +25,15 @@ int main() {
 
     std::cout << "\nElement of index: " << vector[0] << " " << vector[5] << std::endl;
     std::cout << "Index of element: " << vector.index(10) << std::endl;
+
+    std::cout << "Quantity of elements: " << vector.quantity() << std::endl;
+    std::cout << "Sum of all elements: " << vector.sum() << std::endl;
+    std::cout << "Average: " << vector.average() << std::endl;
+    std::cout << "Min: " << vector.min() << std::endl;
+    std::cout << "Max: " << vector.max() << std::endl;
+
+    vector.cls();
+    std::cout << "Quantity of clear array: " << vector.quantity() << "\nClear array itself: ";
+    vector.print();
 
 }

@@ -1,6 +1,7 @@
 // size_t может принимать любые значения, поэтому буду его использовать
 
 #include <iostream>
+#include <limits>
 
 template<typename T>
 class Vector { // Говорили (аналог vector C++) получили Vector
@@ -32,6 +33,11 @@ public:
             }
         }
         return -1; // Если элемента нет, то ты как бы тупой
+    }
+
+    // Кол-во элементов в массиве
+    size_t quantity() const {
+        return all_elements;
     }
     
     // Увеличение размера массива
@@ -90,4 +96,46 @@ public:
         }
         std::cout << std::endl;
     }
+
+    // Очистка контейнера
+    void cls() {
+        all_elements = 0;
+    }
+
+    // Сумма всех значений 
+    T sum() {
+        T  counter = 0; // Счётчик, который будет прибавлять в себя все значения пока i не дойдёт до all_elements
+        for (size_t i = 0; i < all_elements; i++) {
+            counter += array[i];
+        }
+        return counter;
+    }
+
+    // Среднее значение
+    T average() {
+        return all_elements ? sum() / all_elements : 0;
+    }
+
+    // Значение min элемента
+    T min() {
+        T min_value = std::numeric_limits<T>::max();
+        for (size_t i = 0; i < all_elements; i++) {
+            if (array[i] < min_value) {
+                min_value = array[i];
+            }
+        }
+        return min_value;
+    }
+
+    // Значение max элемента
+    T max() {
+        T max_value = std::numeric_limits<T>::lowest();
+        for (size_t i = 0; i < all_elements; i++) {
+            if (array[i] > max_value) {
+                max_value = array[i];
+            }
+        }
+        return max_value;
+    }
+
 };
