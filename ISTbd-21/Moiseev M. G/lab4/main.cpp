@@ -9,14 +9,16 @@ void heapsort(int array[], int arrayLength) {
                     if (array[j] < array[2 * j + 1]) { //срвнение родителя и ребенка
                         std::swap(array[j], array[2 * j + 1]);
                     }
-                } else {
+                }
+                else {
                     if (array[j] < array[2 * j + 2]) {
                         std::swap(array[j], array[2 * j + 2]);
                     }
                 }
-            } else if (2 * j + 1 <= arrayLength - 1 - i) { //если массив нечетный
-                if (array[j] < array[2*j + 1]) {
-                    std::swap(array[j], array[2*j + 1]);
+            }
+            else if (2 * j + 1 <= arrayLength - 1 - i) { //если массив нечетный
+                if (array[j] < array[2 * j + 1]) {
+                    std::swap(array[j], array[2 * j + 1]);
                 }
             }
         }
