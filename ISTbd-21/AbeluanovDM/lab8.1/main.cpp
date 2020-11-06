@@ -14,7 +14,7 @@ int main() {
     vector.print();
     vector.supplement(2);
     vector.supplement(5);
-    std::cout << "Supp array 2(idk for what...):   "; // Вспомнил! Я просто закрыл 10 числами с права
+    std::cout << "Supp array 2(idk for what...):   "; // Я просто закрыл значение 10 числами с права
     vector.print();
     vector.insert(2, 100);
     std::cout << "Inserted 1 element to array (2): ";
