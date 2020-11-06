@@ -1,12 +1,14 @@
 #include <iostream>
 #include <cstdio>
+#include <fstream>
 
 using namespace std;
 
 void MergeSort(int *arr, int number_left, int number_right)
 {
+
     //нужен массив-хранилище
-    int arr_conteiner[12];
+    int arr_conteiner[20];
     if (number_left == number_right) {
         return;//если левая граница совпадает с правой, то мы дошли до массива в 1 элемент
     }
@@ -26,9 +28,6 @@ void MergeSort(int *arr, int number_left, int number_right)
     //если правый текущий больше правого в общем, то уже нет смысла сравнивать кто больше, так как остались лишь элементы слева
         if ((r_cur>number_right)||((l_cur<=middle)&&(arr[l_cur]<arr[r_cur])))
         {
-            std::cout<<"r_cur="<<r_cur<<"\n";
-            std::cout<<"number_right="<<number_right<<"\n";
-            std::cout<<arr[l_cur]<<"<"<<arr[r_cur]<<"\n";
             arr_conteiner[step]=arr[l_cur];
             l_cur++;
         }
@@ -44,13 +43,37 @@ void MergeSort(int *arr, int number_left, int number_right)
 }
 
 int main()
-{
-    int arr[12]={14,12,5,3,6,7,17,8,1,2,18,9};
-    int *uk1=&arr[0];
-    for(int i=0;i<12;i++)
-    std::cout<<arr[i]<<" ";
+{   
+    //указатель на поток
+    FILE* file=fopen("file.txt","r");
+    if(file==0){return 1;};
+    int value,counter=0;
+    //здесь мы узнаем сколько чисел в массиве будет
+    while(true){
+        if(fscanf(file,"%d",&value)==1)
+        counter++;
+        if(feof(file))
+        break;
+    }
+    int size=counter;
+    //создание массива под считанные числа, выделяем блок памяти ивозвращаем указатель на начало блока
+    int* array_in=(int*)malloc(sizeof(int)*size);
+    //установка указателя чтения на начало файла
+    fseek(file,0,SEEK_SET);
+    //проходим по файлу еще раз, теперь считывая в созданный массив значения
+    for (int i = 0; i < size; ++i) {
+    fscanf(file, "%d", &array_in[i]);
+    } 
+    int *uk=&array_in[0];
+    for(int i=0;i<size;i++)
+    std::cout<<array_in[i]<<" ";
+    MergeSort(uk,0,size-1);
     std::cout<<"\n";
-    MergeSort(uk1,0,11);
-    for(int i=0;i<12;i++)
-    std::cout<<arr[i]<<" ";
+    for(int i=0;i<size;i++)
+    std::cout<<array_in[i]<<" ";
+    //Кусочек, записывающий вместо исходного массива отсортированный
+    //ofstream object;
+    //object.open("file.txt");
+    //for(int i=0;i<size;i++)
+    //object<<array_in[i]<<" ";
 }
