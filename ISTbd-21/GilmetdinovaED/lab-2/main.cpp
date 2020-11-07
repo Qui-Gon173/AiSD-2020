@@ -2,7 +2,7 @@
 
 using namespace std;
 
-void Swap(int *Massiv, int i)//функция обмена
+void Swap(int *Massiv, int i)//С„СѓРЅРєС†РёСЏ РѕР±РјРµРЅР°
 {
 int temp;
 temp=Massiv[i];
@@ -10,7 +10,7 @@ Massiv[i]=Massiv[i-1];
 Massiv[i-1]=temp;
 }
 
-void ShakerSort(int *Massiv, int Start, int N)//функция шейкерной сортировки
+void ShakerSort(int *Massiv, int Start, int N)//С„СѓРЅРєС†РёСЏ С€РµР№РєРµСЂРЅРѕР№ СЃРѕСЂС‚РёСЂРѕРІРєРё
 {
 int Left, Right, i;
 Left=Start;
@@ -30,12 +30,12 @@ int main()
 {
 setlocale(LC_ALL,"Rus");
 int sizeArr, i;
-cout<<"Введите размер массива  "; cin>>sizeArr;
+cout<<"Р’РІРµРґРёС‚Рµ СЂР°Р·РјРµСЂ РјР°СЃСЃРёРІР°  "; cin>>sizeArr;
 int *arr=new int[sizeArr];
 for (i=0; i<sizeArr; i++)
-{ cout<<"Введите "<<i+1<<" элемент  "; cin>>arr[i]; }
+{ cout<<"Р’РІРµРґРёС‚Рµ "<<i+1<<" СЌР»РµРјРµРЅС‚  "; cin>>arr[i]; }
 ShakerSort(arr, 1, sizeArr);
-cout<<"Результирующий массив: ";
+cout<<"Р РµР·СѓР»СЊС‚РёСЂСѓСЋС‰РёР№ РјР°СЃСЃРёРІ: ";
 for (i=0; i<sizeArr; i++)
     {cout<<" "<<arr[i];}
 
