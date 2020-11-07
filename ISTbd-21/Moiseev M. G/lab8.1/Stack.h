@@ -29,6 +29,7 @@ public:
     T average();
     T min();
     T max();
+    void clear();
 };
 
 // реализация методов шаблона класса Stack
@@ -194,4 +195,9 @@ T Stack<T>::max() {
         if (max < stackPtr[i]) max = stackPtr[i];
     }
     return max;
+}
+
+template <typename T>
+void Stack<T>::clear() {
+    this->top = 0;
 }
