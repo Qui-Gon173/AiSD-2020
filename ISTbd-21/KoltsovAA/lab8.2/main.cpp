@@ -3,27 +3,19 @@
 
 #include "Vector.h"
 #include "utils.h"
+#include "ExpotentialGenerator.h"
 
 
 int main() {
-    Vector<double> vector;
+    ExpotentialGenerator<double> gen(2, 0, 1, 15);
+    Vector<double> vector(gen);
 
-    vector.append(0);
-    repr(vector);  // [0]
-    vector.append(1);
-    repr(vector);  // [0, 1]
-    vector.append(2);
-    repr(vector);  // [0, 1, 2]
-    vector.append(3);
-    repr(vector);  // [0, 1, 2, 3]
-    vector.insert(100, 4);
-    repr(vector);  // [0, 1, 2, 3, 4]
-    vector.insert(3, -10);
-    repr(vector);  // [0, 1, 2, -10, 3, 4]
-    vector.del(1);
-    repr(vector);  // [0, 2, -10, 3, 4]
-    std::cout << vector[2] << std::endl;  // -10
-    std::cout << vector.index(3) << std::endl;  // 3
+    vector.insert(3, -3.14);
+
+    repr(vector);
+
+    std::cout << "vector[2] = " << vector[2] << std::endl;
+    std::cout << "index of 1024 = " << vector.index(1024) << std::endl;
 
     std::cout << "len = " << vector.len() << std::endl;
     std::cout << "sum = " << get_sum(vector) << std::endl;

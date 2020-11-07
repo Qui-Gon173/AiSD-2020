@@ -4,6 +4,7 @@
 #include <limits>
 
 #include "VectorIterator.h"
+#include "ExpotentialGenerator.h"
 
 
 const size_t DEFAULT_ALLOCATED_LENGTH = 32;
@@ -32,11 +33,19 @@ private:
         this->array = new_array;
     }
 public:
-    typedef VectorIterator<T> iterator;
-    typedef VectorIterator<const T> const_iterator;
+    using iterator = VectorIterator<T>;
+    using const_iterator = VectorIterator<const T>;
 
     Vector(size_t length = DEFAULT_ALLOCATED_LENGTH) : allocated_length(length) {
         this->array = new T[length];
+    }
+
+    Vector(ExpotentialGenerator<T>& gen) {
+        this->allocated_length = gen.len() * RESIZE_COEFFICIENT;
+        this->array = new T[this->allocated_length];
+        for (T& item : gen) {
+            this->append(item);
+        }
     }
 
     ~Vector() {
