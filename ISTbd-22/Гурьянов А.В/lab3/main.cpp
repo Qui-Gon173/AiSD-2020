@@ -39,7 +39,6 @@ void quicksort(int array[], int nVar, int left, int right)
             array[j] = temp;
             i++;
             j--;
-            temp = 0;
         }
     } while (i <= j);
     if (left < j)
