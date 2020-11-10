@@ -10,7 +10,6 @@ private:
     T exp;
     T step;
     size_t iter_count = 0;
-    T* value;
 
 public:
     ExpotentialIterator(
@@ -18,13 +17,7 @@ public:
         T exp,
         T step,
         size_t iter_count
-    ) : base(base), exp(exp), step(step), iter_count(iter_count) {
-        value = new T;
-    }
-
-    ~ExpotentialIterator() {
-        delete value;
-    }
+    ) : base(base), exp(exp), step(step), iter_count(iter_count) {}
 
     bool operator!=(ExpotentialIterator const& other) const {
         return this->iter_count != other.iter_count;
@@ -36,12 +29,14 @@ public:
 
     typename ExpotentialIterator::reference operator*() const {
         // slow but... I don't care.
-        *this->value = 1;
+        T value = 1;
+
         for (size_t i = 0; i < this->exp; i++) {
-            *this->value *= this->base;
+            value *= this->base;
         }
 
-        return *this->value;
+        T* pvalue = &value;
+        return *pvalue;
     }
 
     ExpotentialIterator& operator++() {
