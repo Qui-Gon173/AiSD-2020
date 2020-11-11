@@ -15,6 +15,8 @@ private:
     size_t allocated_length;
 
     void manage_size() {
+        // alloc memory for new elements
+
         if (this->length < this->allocated_length) {
             return;
         }
@@ -86,6 +88,8 @@ public:
     }
 
     void repr() {
+        // python-like repr for Vector
+
         std::cout << "[";
         size_t i = 0;
         for (; i < length - 1; i++) {
@@ -95,6 +99,7 @@ public:
     }
 
     void clear() {
+        // awesome O(1) clear...
         this->length = 0;
     }
 
@@ -107,6 +112,7 @@ public:
     }
 
     T get_average() {
+        // C++ != JS
         return this->length ? this->get_sum() / this->length : 0;
     }
 
