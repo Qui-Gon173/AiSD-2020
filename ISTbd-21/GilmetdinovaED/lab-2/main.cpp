@@ -2,27 +2,27 @@
 
 using namespace std;
 
-void Swap(int *Massiv, int i)//функция обмена
+void Swap(int *arr, int i)//функция обмена
 {
 int temp;
-temp=Massiv[i];
-Massiv[i]=Massiv[i-1];
-Massiv[i-1]=temp;
+temp=arr[i];
+arr[i]=arr[i-1];
+arr[i-1]=temp;
 }
 
-void ShakerSort(int *Massiv, int Start, int N)//функция шейкерной сортировки
+void ShakerSort(int *arr, int start, int n)//функция шейкерной сортировки
 {
-int Left, Right, i;
-Left=Start;
-Right=N-1;
-while (Left<=Right)
+int left, right, i;
+left=start;
+right=n-1;
+while (left<=right)
 {
-for (i=Right; i>=Left; i--)
-if (Massiv[i-1]>Massiv[i]) Swap(Massiv, i);
-Left++;
-for (i=Left; i<=Right; i++)
-if (Massiv[i-1]>Massiv[i]) Swap(Massiv, i);
-Right--;
+for (i=right; i>=left; i--)
+if (arr[i-1]>arr[i]) Swap(arr, i);
+left++;
+for (i=left; i<=right; i++)
+if (arr[i-1]>arr[i]) Swap(arr, i);
+right--;
 }
 }
 
