@@ -30,13 +30,19 @@ int main()
 {
 setlocale(LC_ALL,"Rus");
 int sizeArr, i;
-cout<<"Введите размер массива  "; cin>>sizeArr;
+cout<<"Введите размер массива  ";
+    cin>>sizeArr;
 int *arr=new int[sizeArr];
 for (i=0; i<sizeArr; i++)
-{ cout<<"Введите "<<i+1<<" элемент  "; cin>>arr[i]; }
+{ 
+ cout<<"Введите "<<i+1<<" элемент  "; 
+ cin>>arr[i]; 
+}
 ShakerSort(arr, 1, sizeArr);
 cout<<"Результирующий массив: ";
 for (i=0; i<sizeArr; i++)
-    {cout<<" "<<arr[i];}
+{
+  cout<<" "<<arr[i]; 
+}
 
 }
