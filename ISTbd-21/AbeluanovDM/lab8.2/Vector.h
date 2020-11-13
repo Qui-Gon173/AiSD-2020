@@ -1,27 +1,60 @@
-// size_t может принимать любые значения, поэтому буду его использовать
-
+#pragma once
 #include <iostream>
 #include <limits>
 
+#include "VectorIter.h"
+#include "ExpGenerator.h"
+
+
 template<typename T>
-class Vector { // Говорили (аналог vector C++) получили Vector
+class Vector {
 private:
     T* array;
     size_t length;
     size_t all_elements = 0;
 public:
     // Размер массива
-    Vector(size_t length = 64) : length(length) { 
-        array = new T[length];
-    }    
+    Vector(size_t all_elements = 64) : length(all_elements) {
+        array = new T[all_elements];
+    }
 
+    // Генератор чисел показательной функции
+    Vector(ExpGenerator<T>& generator) {
+        length = generator.moves() * 2; // Размер
+        array = new T[length];  // Массив по размеру
+        for (T& item : generator) {  // Добавление чисел
+            supplement(item);   
+        }
+    }
+
+    using iterator = VectorIter<T>;
+    using c_iter = VectorIter<const T>;
+    
     // Деструктор
     ~Vector() {
         delete[] array;
     }
 
+    // Вычисление начала для const
+    c_iter begin() const {
+        return iterator(array);
+    }
+    // Вычисление конца для const
+    c_iter end() const {
+        return iterator(array + all_elements);
+    }
+
+    // Вычисление начала
+    iterator begin() {
+        return iterator(array);
+    }
+    // Вычисление конца
+    iterator end() {
+        return iterator(array + all_elements);
+    }
+
     // Поиск по индексу массива
-    T operator[](size_t index) { 
+    T operator[](size_t index) {
         return array[index]; // Тупо возвращаем элемент(индекса)
     }
 
@@ -32,14 +65,14 @@ public:
                 return i; // Возвращаем индекс элемента который нашли способом выше (2 строчки линейного поиска)
             }
         }
-        return -1; // Если элемента нет, то ты как бы тупой
+        return -1;
     }
 
     // Кол-во элементов в массиве
     size_t quantity() const {
         return all_elements;
     }
-    
+
     // Увеличение размера массива
     void append() {
         size_t length = all_elements * sizeof(T);
@@ -69,7 +102,7 @@ public:
             return;
         }
 
-        for (size_t i = all_elements - 1; i >= position; i--) {  // Вычисление позиции
+        for (size_t i = all_elements - 1; i >= position; i--) { // Вычисление позиции
             array[i + 1] = array[i];
         }
 
@@ -89,53 +122,8 @@ public:
         all_elements--; // шоб небыло дублирования последнего элемента
     }
 
-    // Обычный принт из Python, ну... может немного получше...
-    void print() {       
-        for(size_t i = 0; i < all_elements; i++) {
-            std::cout << array[i] << " ";
-        }
-        std::cout << std::endl;
-    }
-
     // Очистка контейнера
     void cls() {
         all_elements = 0;
     }
-
-    // Сумма всех значений 
-    T sum() {
-        T  counter = 0; // Счётчик, который будет прибавлять в себя все значения пока i не дойдёт до all_elements
-        for (size_t i = 0; i < all_elements; i++) {
-            counter += array[i];
-        }
-        return counter;
-    }
-
-    // Среднее значение
-    T average() {
-        return all_elements ? sum() / all_elements : 0;
-    }
-
-    // Значение min элемента
-    T min() {
-        T min_value = std::numeric_limits<T>::max();
-        for (size_t i = 0; i < all_elements; i++) {
-            if (array[i] < min_value) {
-                min_value = array[i];
-            }
-        }
-        return min_value;
-    }
-
-    // Значение max элемента
-    T max() {
-        T max_value = std::numeric_limits<T>::lowest();
-        for (size_t i = 0; i < all_elements; i++) {
-            if (array[i] > max_value) {
-                max_value = array[i];
-            }
-        }
-        return max_value;
-    }
-
 };
