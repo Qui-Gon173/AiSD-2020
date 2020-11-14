@@ -10,7 +10,6 @@ void PrintArray(int array[], int size)
 	}
 }
 
-// Сортировка методом перебора
 
 void SelectionSort(int array[], int size)
 {
