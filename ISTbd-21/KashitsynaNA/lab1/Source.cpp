@@ -2,12 +2,12 @@
 #include <cstdlib>
 #include <ctime>
 using namespace std;
-const int arrSize = 20;
+const int ARRSIZE = 20;
 
 int main()
 {
 	setlocale(LC_ALL, "rus");
-	int arr[arrSize], desiredValue, i;
+	int arr[ARRSIZE], desiredValue, i;
 	int minDiaposon = 0, maxDiaposon = 20;
 	int desiredIndex = -1;
 
@@ -17,11 +17,11 @@ int main()
 	cout << endl << "Массив:" << endl;
 	srand(time(0));
 	//Заполняю массив случайными числами:
-	for (i = 0; i < arrSize; i++)
+	for (i = 0; i < ARRSIZE; i++)
 	{
 		arr[i] = minDiaposon + rand() % (maxDiaposon - minDiaposon + 1);
 		//Последнему элементу массива присваиваю искомое значение(барьер):
-		if (i == (arrSize - 1))
+		if (i == (ARRSIZE - 1))
 		{
 			arr[i] = desiredValue;
 		}
@@ -30,7 +30,7 @@ int main()
 	}
 
 	//Выполняю поиск:
-	for (i = 0; i < arrSize; i++)
+	for (i = 0; i < ARRSIZE; i++)
 	{
 		if (arr[i] == desiredValue)
 	    {
