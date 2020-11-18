@@ -9,7 +9,7 @@ void Simple_Merging_Sort (char *name){
   FILE *f, *f1, *f2;
   kol = 0;
   if ( (f = fopen(name,"r")) == NULL )
-    printf("\n Исходный файл не может быть прочитан...");
+    cout<<"\n Исходный файл не может быть прочитан..."<<endl;
   else {
     while ( !feof(f) ) 
     {
