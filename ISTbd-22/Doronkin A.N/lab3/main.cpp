@@ -1,20 +1,6 @@
 #include <iostream>
 using namespace std;
 
-int perv,posled,n;
-int *Mas2=new int[n];
-void vvod2 (int Mas2[]) // функция ввода элемента и размерности массива
-{
-
-    cout<<"Введите размерность массива: ";
-    cin>>n;
-    cout<<"Исходный массив: ";
-    for ( int i=0; i<n; i++)
-    {
-    cin>>Mas2[i];
-    }
-}
-
 void fastsort(int *mas, int perv, int posled) // функция быстрой сортировки
 {
     int mid, count;
@@ -49,9 +35,10 @@ void fastsort(int *mas, int perv, int posled) // функция быстрой �
       fastsort(mas, f, posled);
     }
 }
-void vivod(int perv,int posled,int Mas2[]) // функция вывода отсортированного массива
+void vivod(int Mas2[],int n) // функция вывода отсортированного массива
 {
-    perv=0; posled=n-1;
+    int perv=0;
+    int posled=n-1;
     fastsort(Mas2, perv, posled);
     cout<<"--------------------------"<<endl;
     cout<<"Отсортиртированный массив: ";
@@ -64,7 +51,15 @@ void vivod(int perv,int posled,int Mas2[]) // функция вывода отс
 }
 int main()
 {
+int n;
+int *Mas2=new int[n];
+cout<<"Введите размерность массива: ";
+cin>>n;
+cout<<"Исходный массив: ";
+for ( int i=0; i<n; i++)
+{
+    cin>>Mas2[i];
+}
 setlocale(LC_ALL,"Rus");
-vvod2(Mas2);
-vivod(perv,posled,Mas2);
+vivod(Mas2,n);
 }
