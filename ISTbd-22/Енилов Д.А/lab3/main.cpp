@@ -54,7 +54,7 @@ void SortOfHoar(int *arr,int first, int last)
         //opornii=opposite;}
 }
 int main()
-{//9,6,3,4,10,8,2,7
+{
     int ar[13]={16,14,2,6,17,15,13,4,7,8,9,10,3};
     int i,conteiner,opornii=0;
     int *uk=&ar[0];
