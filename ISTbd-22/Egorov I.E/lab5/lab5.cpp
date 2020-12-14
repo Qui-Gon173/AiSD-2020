@@ -7,82 +7,86 @@
 
 
 using namespace std;
-
+//Код в c-style , переписать на плюсы и дать уникальные/осмысленные имена переменным
 void Simple_Merging_Sort (char *name){
   int a1, a2, k, i, j, kol, tmp;
-  FILE *f, *f1, *f2;
+  fstream FullF("FullF.txt");
+  string FullS;
+  fstream FirstPartF("FirstPartF.txt");
+  fstream SecondPartF("SecondPartF.txt");
   kol = 0;
-  if ( (f = fopen(name,"r")) == NULL )
-    printf("\nИсходный файл не может быть прочитан...");
+  FullF>>FullS;
+  if ( !FullF )
+  cout<<"Source file not open..."<<endl;
   else {
-    while ( !feof(f) ) {
-      fscanf(f,"%d",&a1);
+    while ( !FullF.eof() ) {
+      FullF>>a1;
       kol++;
     }
-    fclose(f);
+   FullF.close();
   }
   k = 1;
   while ( k < kol ){
-    f = fopen(name,"r");
-    f1 = fopen("smsort_1","w");
-    f2 = fopen("smsort_2","w");
-    if ( !feof(f) ) fscanf(f,"%d",&a1);
-    while ( !feof(f) ){
-      for ( i = 0; i < k && !feof(f) ; i++ ){
-        fprintf(f1,"%d ",a1);
-        fscanf(f,"%d",&a1);
+   FullF.open("FullF.txt");
+   FirstPartF.open("FirstPartF.txt");
+   SecondPartF.open("SecondPartF.txt");
+    if ( !FullF.eof() ) FullF>>a1;;
+    while ( !FullF.eof() ){
+      for ( i = 0; i < k && !FullF.eof() ; i++ ){
+        FirstPartF<<a1<<endl;
+        FullF>>a1;
       }
-      for ( j = 0; j < k && !feof(f) ; j++ ){
-        fprintf(f2,"%d ",a1);
-        fscanf(f,"%d",&a1);
+      for ( j = 0; j < k && !FullF.eof() ; j++ ){
+        SecondPartF<<a1<<endl;
+        FullF>>a1;
       }
     }
-    fclose(f2);
-    fclose(f1);
-    fclose(f);
+    FirstPartF.close();
+    SecondPartF.close();
+    FullF.close();
 
-    f = fopen(name,"w");
-    f1 = fopen("smsort_1","r");
-    f2 = fopen("smsort_2","r");
-    if ( !feof(f1) ) fscanf(f1,"%d",&a1);
-    if ( !feof(f2) ) fscanf(f2,"%d",&a2);
-    while ( !feof(f1) && !feof(f2) ){
+    FullF.open("FullF.txt");
+    FirstPartF.open("FirstPartF.txt");
+    SecondPartF.open("SecondPartF.txt");
+    if ( !FirstPartF.eof() )  FirstPartF>>a1;
+    if ( !SecondPartF.eof() )  SecondPartF>>a2;
+    while ( !FirstPartF.eof() && !SecondPartF.eof() ){
       i = 0;
       j = 0;
-      while ( i < k && j < k && !feof(f1) && !feof(f2) ) {
+      while ( i < k && j < k && !FirstPartF.eof() && !SecondPartF.eof() ) {
         if ( a1 < a2 ) {
-          fprintf(f,"%d ",a1);
-          fscanf(f1,"%d",&a1);
+          FullF<<a1<<endl;
+          FirstPartF>>a1;
           i++;
         }
         else {
-          fprintf(f,"%d ",a2);
-          fscanf(f2,"%d",&a2);
+          FullF<<a2<<endl;
+          SecondPartF>>a2;
           j++;
         }
       }
-      while ( i < k && !feof(f1) ) {
-        fprintf(f,"%d ",a1);
-        fscanf(f1,"%d",&a1);
+      while ( i < k && !FirstPartF.eof() ) {
+        FullF<<a1<<endl;
+          FirstPartF>>a1;
         i++;
       }
-      while ( j < k && !feof(f2) ) {
-        fprintf(f,"%d ",a2);
-        fscanf(f2,"%d",&a2);
+      while ( j < k && !SecondPartF.eof() ) {
+        FullF<<a2<<endl;
+        SecondPartF>>a2;
         j++;
       }
     }
-    while ( !feof(f1) ) {
-      fprintf(f,"%d ",a1);
-      fscanf(f1,"%d",&a1);
+    while ( !FirstPartF.eof() ) {
+      FullF<<a1<<endl;
+      FirstPartF>>a1;
     }
-    while ( !feof(f2) ) {
-      fprintf(f,"%d ",a2);
-      fscanf(f2,"%d",&a2);
+    while ( !SecondPartF.eof() ) {
+      FullF<<a2<<endl;
+      SecondPartF>>a2;
     }
-    fclose(f2);
-    fclose(f1);
-    fclose(f);
+    FullF.close();
+    FirstPartF.close();
+    SecondPartF.close();
     k *= 2;
   }
   remove("smsort_1");
