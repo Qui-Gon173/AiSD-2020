@@ -7,14 +7,15 @@
 
 
 using namespace std;
-//Код в c-style , переписать на плюсы и дать уникальные/осмысленные имена переменным
+
 void Simple_Merging_Sort (char *name){
   int a1, a2, k, i, j, kol, tmp;
-  fstream FullF("FullF.txt");
+  fstream FullF;
   string FullS;
-  fstream FirstPartF("FirstPartF.txt");
-  fstream SecondPartF("SecondPartF.txt");
+  fstream FirstPartF;
+  fstream SecondPartF;
   kol = 0;
+  FullF.open(name, fstream::in);
   FullF>>FullS;
   if ( !FullF )
   cout<<"Source file not open..."<<endl;
@@ -27,9 +28,9 @@ void Simple_Merging_Sort (char *name){
   }
   k = 1;
   while ( k < kol ){
-   FullF.open("FullF.txt");
-   FirstPartF.open("FirstPartF.txt");
-   SecondPartF.open("SecondPartF.txt");
+   FullF.open(name, fstream::in);
+   FirstPartF.open("FirstPartF.txt", fstream::out);
+   SecondPartF.open("SecondPartF.txt", fstream::out);
     if ( !FullF.eof() ) FullF>>a1;;
     while ( !FullF.eof() ){
       for ( i = 0; i < k && !FullF.eof() ; i++ ){
@@ -45,9 +46,9 @@ void Simple_Merging_Sort (char *name){
     SecondPartF.close();
     FullF.close();
 
-    FullF.open("FullF.txt");
-    FirstPartF.open("FirstPartF.txt");
-    SecondPartF.open("SecondPartF.txt");
+    FullF.open(name, fstream::out);
+    FirstPartF.open("FirstPartF.txt", fstream::in);
+    SecondPartF.open("SecondPartF.txt", fstream::in);
     if ( !FirstPartF.eof() )  FirstPartF>>a1;
     if ( !SecondPartF.eof() )  SecondPartF>>a2;
     while ( !FirstPartF.eof() && !SecondPartF.eof() ){
@@ -89,8 +90,8 @@ void Simple_Merging_Sort (char *name){
     SecondPartF.close();
     k *= 2;
   }
-  remove("smsort_1");
-  remove("smsort_2");
+  remove("FirstPartF.txt");
+  remove("SecondPartF.txt");
 }
 
 int main(){
