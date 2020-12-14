@@ -2,15 +2,7 @@
 
 using namespace std;
 
-void zapoln (int h,int massiv[])
-{
 
-  cout<<"Введите массив:";
-  for (int i = 0; i<h; i++)
-    {
-        cin>>massiv[i];
-    }
-}
 void siftDown(int *number, int root, int flag)
 {
   int maxindex;
