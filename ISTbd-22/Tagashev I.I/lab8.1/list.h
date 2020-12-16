@@ -150,7 +150,7 @@ public:
 		Node<T>* Current = head;
 		if (size == 0)
 		{
-			std::cout << "Ñïèñîê ïóñò." << std::endl << std::endl;
+			std::cout << "Ğ¡Ğ¿Ğ¸ÑĞ¾Ğº Ğ¿ÑƒÑÑ‚." << std::endl << std::endl;
 		}
 		else
 		{
@@ -169,7 +169,7 @@ public:
 
 		if (size == 0)
 		{
-			std::cout << "Ñïèñîê ïóñò." << std::endl << std::endl;
+			std::cout << "Ğ¡Ğ¿Ğ¸ÑĞ¾Ğº Ğ¿ÑƒÑÑ‚." << std::endl << std::endl;
 		}
 		else
 		{
