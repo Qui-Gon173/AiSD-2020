@@ -5,7 +5,7 @@ int main()
 {
 	setlocale(LC_ALL, "RUS");
 
-	std::cout << "Ğ¢ĞµÑÑ‚ Ñ€Ğ°Ğ±Ğ¾Ñ‚Ñ‹." << std::endl;
+	std::cout << "Òåñò ğàáîòû." << std::endl;
 
 	List<int>* list1 = new List<int>;
 	list1->print_list();
@@ -14,45 +14,45 @@ int main()
 	unsigned long var3 = 2;
 	unsigned long var4 = 7;
 
-	std::cout << "Ğ”Ğ¾Ğ±Ğ°Ğ²Ğ»ÑĞµĞ¼ ÑĞ»-Ñ‚ " << var << std::endl;
+	std::cout << "Äîáàâëÿåì ıë-ò " << var << std::endl;
 	list1->append(var);
-	std::cout << "Ğ”Ğ¾Ğ±Ğ°Ğ²Ğ»ÑĞµĞ¼ ÑĞ»-Ñ‚ " << var2 << std::endl;
+	std::cout << "Äîáàâëÿåì ıë-ò " << var2 << std::endl;
 	list1->append(var2);
-	std::cout << "Ğ”Ğ¾Ğ±Ğ°Ğ²Ğ»ÑĞµĞ¼ ÑĞ»-Ñ‚ " << var3 << std::endl;
+	std::cout << "Äîáàâëÿåì ıë-ò " << var3 << std::endl;
 	list1->append(var3);
 	std::cout << std::endl;
 
-	std::cout << "ĞŸĞµÑ‡Ğ°Ñ‚ÑŒ ÑĞ¿Ğ¸ÑĞºĞ°:" << std::endl;
+	std::cout << "Ïå÷àòü ñïèñêà:" << std::endl;
 	list1->print_list();
 	std::cout << std::endl;
 
-	std::cout << "Ğ”Ğ¾Ğ±Ğ°Ğ²Ğ»ÑĞµĞ¼ ÑĞ»-Ñ‚ " << var4 << " Ğ½Ğ° Ñ‚Ñ€ĞµÑ‚ÑŒĞµ Ğ¼ĞµÑÑ‚Ğ¾" << std::endl;
+	std::cout << "Äîáàâëÿåì ıë-ò " << var4 << " íà òğåòüå ìåñòî" << std::endl;
 	list1->insert(var4, 3);
 
-	std::cout << "ĞŸĞµÑ‡Ğ°Ñ‚ÑŒ ÑĞ¿Ğ¸ÑĞºĞ°:" << std::endl;
+	std::cout << "Ïå÷àòü ñïèñêà:" << std::endl;
 	list1->print_list();
 	std::cout << std::endl;
 
-	std::cout << "Ğ£Ğ´Ğ°Ğ»ÑĞµĞ¼ ÑĞ»-Ñ‚ Ñ Ğ¸Ğ½Ğ´ĞºÑĞ¾Ğ¼ " << 2 << std::endl;
-	list1->delete_ind(2);
+	std::cout << "Óäàëÿåì ıë-ò ñ èíäêñîì " << 3 << std::endl;
+	list1->delete_ind(3);
 
-	std::cout << "ĞŸĞµÑ‡Ğ°Ñ‚ÑŒ ÑĞ¿Ğ¸ÑĞºĞ°:" << std::endl;
+	std::cout << "Ïå÷àòü ñïèñêà:" << std::endl;
 	list1->print_list();
 	std::cout << std::endl;
 
-	std::cout << "ĞŸĞµÑ‡Ğ°Ñ‚ÑŒ Ğ¾Ğ±Ñ€Ğ°Ñ‚Ğ½Ğ¾Ğ³Ğ¾ ÑĞ¿Ğ¸ÑĞºĞ°:" << std::endl;
+	std::cout << "Ïå÷àòü îáğàòíîãî ñïèñêà:" << std::endl;
 	list1->print_list_reverse();
 	std::cout << std::endl;
 
-	std::cout << "Ğ˜Ğ½Ğ´ĞµĞºÑ Ğ¸ÑĞºĞ¾Ğ¼Ğ¾Ğ³Ğ¾ ÑĞ»-Ñ‚Ğ° " << var3 << " Ñ€Ğ°Ğ²ĞµĞ½ " << list1->search_ind(var3) << std::endl;
+	std::cout << "Èíäåêñ èñêîìîãî ıë-òà " << var3 << " ğàâåí " << list1->search_ind(var3) << std::endl;
 
-	std::cout << "ĞšĞ¾Ğ»-Ğ²Ğ¾ ÑĞ»-Ğ¾Ğ²: " << std::endl << list1->get_size() << std::endl;
+	std::cout << "Êîë-âî ıë-îâ: " << std::endl << list1->get_size() << std::endl;
 
 	list1->properties_list();
 
-	std::cout << "Ğ£Ğ´Ğ°Ğ»ĞµĞ½Ğ¸Ğµ ÑĞ¿Ğ¸ÑĞºĞ°" << std::endl;
+	std::cout << "Óäàëåíèå ñïèñêà" << std::endl;
 	list1->delete_front();
-	std::cout << "ĞŸĞµÑ‡Ğ°Ñ‚ÑŒ ÑĞ¿Ğ¸ÑĞºĞ°:" << std::endl;
+	std::cout << "Ïå÷àòü ñïèñêà:" << std::endl;
 	list1->print_list();
 
 }
