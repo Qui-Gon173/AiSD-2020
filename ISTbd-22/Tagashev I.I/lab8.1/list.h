@@ -79,17 +79,30 @@ public:
 		}
 		else
 		{
-
-			Node<T>* tmp = new Node<T>(data);
-			Node<T>* Current = head;
-			for (int i = 0; i < ind - 1; i++)
-			{
-				Current = Current->next;
+			if (ind < size / 2) {
+				Node<T>* tmp = new Node<T>(data);
+				Node<T>* Current = head;
+				for (int i = 0; i < ind - 1; i++)
+				{
+					Current = Current->next;
+				}
+				Current->prev->next = tmp;
+				tmp->prev = Current->prev;
+				tmp->next = Current;
+				Current->prev = tmp;
 			}
-			Current->prev->next = tmp;
-			tmp->prev = Current->prev;
-			tmp->next = Current;
-			Current->prev = tmp;
+			else {
+				Node<T>* tmp = new Node<T>(data);
+				Node<T>* Current = head;
+				for (int i = ind; i > size / 2; i--)
+				{
+					Current = Current->next;
+				}
+				Current->prev->next = tmp;
+				tmp->prev = Current->prev;
+				tmp->next = Current;
+				Current->prev = tmp;
+			}
 		}
 		size++;
 	}
@@ -105,16 +118,30 @@ public:
 		}
 		else
 		{
-			Node<T>* Current = head;
-			for (int i = 0; i < ind - 1; i++)
-			{
-				Current = Current->next;
+			if (ind < size / 2) {
+				Node<T>* Current = head;
+				for (int i = 0; i < ind - 1; i++)
+				{
+					Current = Current->next;
+				}
+				if (Current == head)
+					head = Current->next;
+				Current->prev->next = Current->next;
+				Current->next->prev = Current->prev;
+				delete Current;
 			}
-			if (Current == head)
-				head = Current->next;
-			Current->prev->next = Current->next;
-			Current->next->prev = Current->prev;
-			delete Current;
+			else {
+				Node<T>* Current = head;
+				for (int i = size; i > ind - 1; i--)
+				{
+					Current = Current->next;
+				}
+				if (Current == head)
+					head = Current->next;
+				Current->prev->next = Current->next;
+				Current->next->prev = Current->prev;
+				delete Current;
+			}
 		}
 		size--;
 	}
