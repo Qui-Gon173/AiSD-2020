@@ -8,20 +8,21 @@ public:
 List();
 ~List();
 void new_node(unsigned long field_data);
-void creation_node_in_target_place(int place, unsigned long field_data);//РјРµС‚РѕРґ РІСЃС‚Р°РІР»СЏСЋС‰РёР№ СѓР·РµР» РЅР° СѓРєР°Р·Р°РЅРЅСѓСЋ РїРѕР·РёС†РёСЋ
-void print_list_ahead();//РјРµС‚РѕРґ, РІС‹РІРѕРґСЏС‰РёР№ РІСЃРµ СЌР»РµРјРµРЅС‚С‹ РѕС‚ РЅР°С‡Р°Р»Р° РґРѕ РєРѕРЅС†Р°
-void print_list_back();//РјРµС‚РѕРґ, РІС‹РІРѕРґСЏС‰РёР№ РІСЃРµ СЌР»РµРјРµРЅС‚С‹ СЃ РєРѕРЅС†Р° РґРѕ РЅР°С‡Р°Р»Р°
+void creation_node_in_target_place(int place, unsigned long field_data);//метод вставляющий узел на указанную позицию
+void print_list_ahead();//метод, выводящий все элементы от начала до конца
+void print_list_back();//метод, выводящий все элементы с конца до начала
 int getsize() {
-    return count_conteiner;};
+    return size;};
 void delete_target_element(int target);
-void pop_front();//СѓРґР°Р»РµРЅРёРµ РїРµСЂРІРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
-void clear();//С‡РёСЃС‚РєР° РєРѕРЅС‚РµР№РЅРµСЂР°
-void search_by_value(unsigned long value);//РїРѕРёСЃРє РёРЅРґРµРєСЃР° РїРѕ Р·РЅР°С‡РµРЅРёСЋ
-unsigned long sum_values_list();//СЃСѓРјРјР° РІСЃРµС… СЌР»РµРјРµРЅС‚РѕРІ
-unsigned long mid_value();//СЃСЂРµРґРЅРµРµ Р·РЅР°С‡РµРЅРёРµ РІСЃРµС… Р·РЅР°С‡РµРЅРёР№ СЌР»РµРјРµРЅС‚РѕРІ
-unsigned long find_min_value();//РїРѕРёСЃРє РјРёРЅРёРјР°Р»СЊРЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ
-unsigned long find_max_value();//РїРѕРёСЃРє РјР°РєСЃРёРјР°Р»СЊРЅРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ
-unsigned long& operator[](const int index);//РІС‹РІРѕРґ Р·РЅР°С‡РµРЅРёСЏ РїРѕ РёРЅРґРµРєСЃСѓ
+void pop_front();//удаление первого элемента
+void clear();//чистка контейнера
+//int search(const int ind);//Поиск по индексу
+void search_by_value(unsigned long value);//поиск индекса по значению
+unsigned long sum_values_list();//сумма всех элементов
+unsigned long mid_value();//среднее значение всех значений элементов
+unsigned long find_min_value();//поиск минимального значения
+unsigned long find_max_value();//поиск максимального значения
+unsigned long& operator[](const int index);//вывод значения по индексу
 private:
 
 class Node
@@ -38,86 +39,96 @@ class Node
         }
     };
 
-int count_conteiner;
-Node *head;//РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚-РіРѕР»РѕРІР°
-Node *tail;//РїРѕСЃР»РµРґРЅРёР№ СЌР»РµРјРµРЅС‚-С…РІРѕСЃС‚
+int size;
+Node *head;//первый элемент-голова
+Node *tail;//последний элемент-хвост
 };
 
 List::List()
 {
-    count_conteiner = 0;
+    size = 0;
     head = nullptr;
 }
 List::~List()
 {
 }
-
-unsigned long & List::operator[](const int index)
+/*unsigned long & List::operator[](const int index)
 {
     int counter = 0;
     Node *current = this->head;
-    while(current != nullptr)
+    while(current != nullptr)// ИСПРАВИТЬ
     {
-        if(counter == index){
+        //Хрен проссышь, работает ли
+        if (counter < size/2)
+        {
+            if(counter == index){
             return current->field_data;
+            cout << "ahead";
         }
         current = current->pNext;
         counter++;
+        }
+        else
+        {
+            if(counter == index){
+            return current->field_data;
+            cout << "back" ;
+        }
+        current = current->pPrevious;
+        counter++;
+        }
+            //аж до сюда
     }
+}*/
 
-}
-
-//РњРµС‚РѕРґС‹ РґРѕР±Р°РІР»РµРЅРёСЏ СЌР»РµРјРµРЅС‚РѕРІ
+//Методы добавления элементов
 void List::new_node(unsigned long field_data)
 {
     if (head == nullptr)
     {
         head = new Node(field_data);
         Node *current = head;
-        cout << "Р‘С‹Р» СЃРѕР·РґР°РЅ РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚: " << "; pPrevious=" << current->pPrevious;
-        cout << ";  РђРґСЂРµСЃ С‚РµРєСѓС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° =  = " << current;
-        cout << "; РРЅС„РѕСЂРјР°С†РёСЏ = " << field_data;
+        cout << "Был создан первый элемент: " << "; pPrevious=" << current->pPrevious;
+        cout << ";  Адрес текущего элемента =  = " << current;
+        cout << "; Информация = " << field_data;
         cout << "; pNext = " << current->pNext << endl;
     }
     else
     {
-        Node *current = this->head;//СЃРѕР·РґР°РµРј СѓРєР°Р·Р°С‚РµР»СЊ, СѓРєР°Р·С‹РІР°СЋС‰РёР№ РЅР° РіРѕР»РѕРІСѓ-1С‹Р№ СЌР»РµРјРµРЅС‚
-        if(count_conteiner == 1 )
-            {//Р•СЃР»Рё СЌС‚Рѕ РІС‚РѕСЂРѕР№ СЌР»РµРјРµРЅС‚
-        Node *current_this;//СѓРєР°Р·Р°С‚РµР»СЊ РґР»СЏ РґРµРјРѕРЅСЃС‚СЂР°С†РёРё С‚РµРєСѓС‰РµРіРѕ Р°РґСЂРµСЃР° С…РІРѕСЃС‚Р°
-        current->pNext = new Node(field_data, current);//СЃРѕР·РґР°РµРј РЅРѕРІС‹Р№ С…РІРѕСЃС‚, РїСЂРёСЃРІРѕРёРІ pNext С…РµРґР° РЅРѕРІС‹Р№ СѓР·РµР»
-        tail = current->pNext;//РіРѕРІРѕСЂРёРј С…РІРѕСЃС‚Сѓ, С‡С‚Рѕ СЌС‚Рѕ СЃРѕР·РґР°Р»Рё РµРіРѕ
-        current_this = current->pNext;//Р°РєРєСѓРјСѓР»РёСЂСѓРµРј Р°РґСЂРµСЃ С…РІРѕСЃС‚Р° РґР»СЏ РІС‹РІРѕРґР°
-        current = current->pNext;//СЃРјРµС‰Р°РµРј current РЅР° С…РІРѕСЃС‚, РґР»СЏ РІС‹РІРѕРґР° РµРіРѕ РїР°СЂР°РјРµС‚СЂРѕРІ
-        cout << "Р‘С‹Р» СЃРѕР·РґР°РЅ РїРѕСЃР»РµРґРЅРёР№ СЌР»РµРјРµРЅС‚: " << " РђРґСЂРµСЃ РїСЂРµРґС‹РґСѓС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° = " << current->pPrevious;
-        cout << "; Р°РґСЂРµСЃ СЌР»РµРјРµРЅС‚Р° = " << current_this;
-        cout << "; РРЅС„РѕСЂРјР°С†РёСЏ = " << field_data;
-        cout << "; Р°РґСЂРµСЃ СЃР»РµРґСѓСЋС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р°:" << current->pNext << ";" << endl;
-        }//Р•СЃР»Рё Р±РѕР»РµРµ, С‡РµРј РІС‚РѕСЂРѕР№
+        Node *current = this->head;//создаем указатель, указывающий на голову-1ый элемент
+        if(size == 1 )
+            {//Если это второй элемент
+        Node *current_this;//указатель для демонстрации текущего адреса хвоста
+        current->pNext = new Node(field_data, current);//создаем новый хвост, присвоив pNext хеда новый узел
+        tail = current->pNext;//говорим хвосту, что это создали его
+        current_this = current->pNext;//аккумулируем адрес хвоста для вывода
+        current = current->pNext;//смещаем current на хвост, для вывода его параметров
+        cout << "Был создан последний элемент: " << " Адрес предыдущего элемента = " << current->pPrevious;
+        cout << "; адрес элемента = " << current_this;
+        cout << "; Информация = " << field_data;
+        cout << "; адрес следующего элемента:" << current->pNext << ";" << endl;
+        }//Если более, чем второй
         else
         {
         Node *conteiner_for_uk;
-        Node *current_this;//СѓРєР°Р·Р°С‚РµР»СЊ РЅР° СЃРѕР·РґР°РІР°РµРјС‹Р№ СЌР»РµРјРµРЅС‚
-        Node *current_prev;//СЃРѕР·РґР°РЅРёРµ СѓРєР°Р·Р°С‚РµР»СЏ РїСЂРµРґС‹РґСѓС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р°
-        conteiner_for_uk = current->pNext;//РїРѕРјРµС‰РµРЅРёРµ РІ РєРѕРЅС‚РµР№РЅРµСЂ СѓРєР°Р·Р°С‚РµР»СЏ РЅР° СЃР»РµРґСѓСЋС‰РёР№ СЌР»РµРјРµРЅС‚ РіРѕР»РѕРІС‹
-        current->pNext = new Node(field_data,head,conteiner_for_uk);//СЃРѕР·РґР°РЅРёРµ РЅРѕРІРѕРіРѕ СѓР·Р»Р°
-        current = current->pNext;//РїРµСЂРµРєР»СЋС‡РµРЅРёРµ РЅР° СЃР»РµРґ. СѓР·РµР»
-        current_this = current;//Р°РєРєСѓРјСѓР»РёСЂРѕРІР°РЅРёРµ Р°РґСЂРµСЃР° СЌС‚РѕРіРѕ СѓР·Р»Р° РґР»СЏ РІС‹РІРѕРґР° Рё РїСЂРѕРІРµСЂРєРё
-        current = current->pNext;//РїРµСЂРµРєР»СЋС‡РµРЅРёРµ РЅР° СѓР·РµР», РіРґРµ РЅСѓР¶РЅРѕ СЃРјРµРЅРёС‚СЊ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РїСЂРµРґС‹РґСѓС‰РёР№
-        current->pPrevious = current_this;//РёР·РјРµРЅРµРЅРёРµ СѓРєР°Р·Р°С‚РµР»СЏ РЅР° РїСЂРѕС€Р»С‹Р№ СЌР»РµРјРµРЅС‚(2РѕРіРѕ СЌР»РµРјРµРЅС‚Р°, РјРµР¶РґСѓ РєРѕС‚РѕСЂС‹РјРё РјС‹ РІСЃС‚Р°РІР»СЏРµРј СѓР·РµР» РЅРѕРІС‹Р№) РЅР° РїСЂР°РІРёР»СЊРЅС‹Р№ СѓРєР°Р·Р°С‚РµР»СЊ РЅР° РІСЃС‚Р°РІР»СЏРµРјС‹Р№ СѓР·РµР»
-        cout << "Р‘С‹Р» СЃРѕР·РґР°РЅ СЌР»РµРјРµРЅС‚: " << " РђРґСЂРµСЃ РїСЂРµРґС‹РґСѓС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° = " << head;
-        cout << "; Р°РґСЂРµСЃ СЌС‚РѕРіРѕ СЌР»РµРјРµРЅС‚Р° = " << current_this;
-        cout << "; РРЅС„РѕСЂРјР°С†РёСЏ = " << field_data;
-        cout << "; Р°РґСЂРµСЃ СЃР»РµРґСѓСЋС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р°:" << conteiner_for_uk << ";" << endl;
+        Node *current_this;//указатель на создаваемый элемент
+        conteiner_for_uk = current->pNext;//помещение в контейнер указателя на следующий элемент головы
+        current->pNext = new Node(field_data,head,conteiner_for_uk);//создание нового узла
+        current = current->pNext;//переключение на след. узел
+        current_this = current;//аккумулирование адреса этого узла для вывода и проверки
+        current = current->pNext;//переключение на узел, где нужно сменить указатель на предыдущий
+        current->pPrevious = current_this;//изменение указателя на прошлый элемент(2ого элемента, между которыми мы вставляем узел новый) на правильный указатель на вставляемый узел
+        cout << "Был создан элемент: " << " Адрес предыдущего элемента = " << head;
+        cout << "; адрес этого элемента = " << current_this;
+        cout << "; Информация = " << field_data;
+        cout << "; адрес следующего элемента:" << conteiner_for_uk << ";" << endl;
         }
     }
-    count_conteiner++;
+    size++;
 }
-
 void List::creation_node_in_target_place(int place, unsigned long field_data)
 {
     Node *current = this->head;
-    int i = 0;
     if(place == 0)
         {
         current->pPrevious = new Node(field_data, nullptr, current);
@@ -125,31 +136,48 @@ void List::creation_node_in_target_place(int place, unsigned long field_data)
     }
     else
     {
-    while(place - i != 1)
-    {
-        current = current->pNext;
-        i++;
-    };
+
+        if (place <= size/2)
+        {
+            current = head;
+            int i = 1;
+            while ( i < place)
+            {
+                current = current->pNext;
+                i++;
+            }
+        }
+        else
+        {
+            current = tail;
+        int i = 1;
+        while (i <= size - place)
+        {
+            current = current->pPrevious;
+            i++;
+        }
+        }
+
     Node *conteiner_for_uk;
-    conteiner_for_uk = current->pNext;//Р°РєРєСѓРјСѓР»РёСЂРѕРІР°РЅРёРµ СѓРєР°Р·Р°С‚РµР»СЏ
-    current->pNext = new Node(field_data, current, conteiner_for_uk);//СЃРѕР·РґР°РЅРёРµ СѓР·Р»Р° РїРѕРґ РІС‹Р±СЂР°РЅРЅС‹Рј РЅРѕРјРµСЂРѕРј
-    current = current->pNext;//РїРµСЂРµРјРµС‰РµРЅРёРµ СѓР·Р»Р°
-    conteiner_for_uk = current;//Р°РєРєСѓРјСѓР»РёСЂРѕРІР°РЅРёРµ РµРіРѕ Р°РґСЂРµСЃР°
-    current = current->pNext;//РїРµСЂРµРјРµС‰РµРЅРёРµ РЅР° СЌР»РµРјРµРЅС‚, СЃС‚РѕСЏС‰РёР№ РїРѕСЃР»Рµ СЃРѕР·РґР°РЅРЅРѕРіРѕ
-    current->pPrevious=conteiner_for_uk;//РёСЃРїСЂР°РІР»РµРЅРёРµ СѓРєР°Р·Р°С‚РµР»СЏ РЅР° РїСЂРµРґС‹РґСѓС‰РёР№
+    conteiner_for_uk = current->pNext;//аккумулирование указателя
+    current->pNext = new Node(field_data, current, conteiner_for_uk);//создание узла под выбранным номером
+    current = current->pNext;//перемещение узла
+    conteiner_for_uk = current;//аккумулирование его адреса
+    current = current->pNext;//перемещение на элемент, стоящий после созданного
+    current->pPrevious=conteiner_for_uk;//исправление указателя на предыдущий
     };
-    count_conteiner++;
-    cout << "Р­Р»РµРјРµРЅС‚ РґРѕР±Р°РІР»РµРЅ" << endl;
+    size++;
+    cout << "Элемент добавлен" << endl;
 }
-//РњРµС‚РѕРґС‹ РІС‹РІРѕРґР° СЃРїРёСЃРєР° РЅР° РєРѕРЅСЃРѕР»СЊ
+//Методы вывода списка на консоль
 void List::print_list_ahead()
 {
     Node *current = this->head;
-    for(int i = 0; i < count_conteiner; i++)
+    for(int i = 0; i < size; i++)
     {
-        cout << "Р­Р»РµРјРµРЅС‚ " << i << ":" << " Р°РґСЂРµСЃ РїСЂРµРґС‹РґСѓС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° = " << current->pPrevious;
-        cout << "; РРЅС„РѕСЂРјР°С†РёСЏ = " << current->field_data;
-        cout << "; РђРґСЂРµСЃ СЃР»РµРґСѓСЋС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° = " << current->pNext << ";" << endl;
+        cout << "Элемент " << i << ":" << " адрес предыдущего элемента = " << current->pPrevious;
+        cout << "; Информация = " << current->field_data;
+        cout << "; Адрес следующего элемента = " << current->pNext << ";" << endl;
         current = current->pNext;
     }
 }
@@ -157,54 +185,71 @@ void List::print_list_ahead()
 void List::print_list_back()
 {
     Node *current = this->tail;
-    for(int i = count_conteiner - 1; i != -1; i--)
+    for(int i = size - 1; i != -1; i--)
     {
-        cout << "Р­Р»РµРјРµРЅС‚ " << i <<":" << " Р°РґСЂРµСЃ РїСЂРµРґС‹РґСѓС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° = " << current->pPrevious;
-        cout << "; РРЅС„РѕСЂРјР°С†РёСЏ = " << current->field_data;
-        cout << "; РђРґСЂРµСЃ СЃР»РµРґСѓСЋС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р° = " << current->pNext << ";" << endl;
+        cout << "Элемент " << i <<":" << " адрес предыдущего элемента = " << current->pPrevious;
+        cout << "; Информация = " << current->field_data;
+        cout << "; Адрес следующего элемента = " << current->pNext << ";" << endl;
         current = current->pPrevious;
     }
 }
 
-//РЈРґР°Р»СЏСЋС‰РёРµ РјРµС‚РѕРґС‹
+//Удаляющие методы
 void List::delete_target_element(int target)
 {
     Node *current = this->head;
-    int i = 0;
     if(target == 0)
         {
-        current = head;
-        head = head->pNext;
-        delete current;
+       cout << "Input position: ";
+       cin >> target;
     }
-    if(target > 0 && target < (count_conteiner - 1))
+    if(target > 0 && target < size-1)
     {
-    while(i - target != 1)
-    {
-        current = current->pNext;
-        i++;
-    };
-    Node *conteiner_for_uk;
+        if (target <= size/2)
+        {
+            current = head;
+            int i = 1;
+            while ( i < target)
+            {
+                current = current->pNext;
+                i++;
+            }
+        }
+        else
+        {
+            current = tail;
+        int i = 1;
+        while (i <= size - target)
+        {
+            current = current->pPrevious;
+            i++;
+        }
+        }
+
+
+
+
+    Node *container_for_uk;
     Node *uk_to_delete;
-    conteiner_for_uk = current;//Р°РєРєСѓРјСѓР»РёСЂРѕРІР°РЅРёРµ Р°РґСЂРµСЃР° СЃР»РµРґСѓСЋС‰РµРіРѕ РїРѕСЃР»Рµ СѓРґР°Р»РµРЅРёСЏ СЌР»РµРјРµРЅС‚Р°
-    current = current->pPrevious;//РїРµСЂРµС…РѕРґ РЅР° СѓРґР°Р»СЏРµРјС‹Р№ СЌР»РµРјРµРЅС‚
-    uk_to_delete = current;//СЃРѕС…СЂР°РЅРµРЅРёРµ Р°РґСЂРµСЃР° СѓРґР°Р»СЏРµРјРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
-    current = current->pPrevious;//РїРµСЂРµС…РѕРґ РЅР° СЌР»РµРјРµРЅС‚ РґРѕ СѓРґР°Р»СЏРµРјРѕРіРѕ
-    current->pNext = conteiner_for_uk;//РїРµСЂРµРЅР°Р·РЅР°С‡РµРЅРёРµ Р°РґСЂРµСЃ СЃР»РµРґСѓСЋС‰РµРіРѕ РЅР° Р°РґСЂРµСЃ РїРѕСЃР»Рµ СЃР»РµРґСѓСЋС‰РµРіРѕ
-    conteiner_for_uk = current;//СЃРѕС…СЂР°РЅРµРЅРёРµ Р°РґСЂРµСЃР° С‚РµРєСѓС‰РµРіРѕ СЌР»РµРјРµРЅС‚Р°
-    current = current->pNext;//РїРµСЂРµС…РѕРґ РЅР° СЌР»РµРјРµРЅС‚ РїРѕСЃР»Рµ СѓРґР°Р»СЏРµРјРѕРіРѕ РїРѕ РѕР±РЅРѕРІР»РµРЅРЅРѕРјСѓ РїСѓС‚Рё
-    current->pPrevious = conteiner_for_uk;//РїРµСЂРµРЅР°Р·РЅР°С‡РµРЅРёРµ СѓРєР°Р·Р°С‚РµР»СЏ РЅР° РїСЂРµРґС‹РґСѓС‰РёР№ СЃ СѓРґР°Р»СЏРµРјРѕРіРѕ СЌР»РµРјРµРЅС‚Р°
+    container_for_uk = current;//аккумулирование адреса следующего после удаления элемента
+    current = current->pPrevious;//переход на удаляемый элемент
+    uk_to_delete = current;//сохранение адреса удаляемого элемента
+    current = current->pPrevious;//переход на элемент до удаляемого
+    current->pNext = container_for_uk;//переназначение адрес следующего на адрес после следующего
+    container_for_uk = current;//сохранение адреса текущего элемента
+    current = current->pNext;//переход на элемент после удаляемого по обновленному пути
+    current->pPrevious = container_for_uk;//переназначение указателя на предыдущий с удаляемого элемента
     delete uk_to_delete;
-    };
-    if(target == (count_conteiner -1))
+    }
+    else
         {
         current = tail;
         tail = tail->pPrevious;
         delete current;
     }
-    count_conteiner--;
+    size--;
 
-    cout << "Р­Р»РµРјРµРЅС‚ СѓРґР°Р»РµРЅ" << endl;
+    cout << "Элемент удален" << endl;
 }
 
 void List::pop_front()
@@ -215,41 +260,41 @@ void List::pop_front()
     head = head->pNext;
     head->pPrevious = nullptr;
     delete temp;
-    count_conteiner--;
+    size--;
     }
     else
     {
          delete head;
-         count_conteiner--;
+         size--;
     }
 }
 
 void List::clear()
 {
-    while(count_conteiner)
+    while(size)
     {
         pop_front();
     }
 }
 
-//РњРµС‚РѕРґС‹ РїРѕРёСЃРєР°
+//Методы поиска
 void List::search_by_value(unsigned long value)
 {
     Node *current = this->head;
     int i = 0;
     if((current->field_data) == value)
         {
-        cout << "IРРЅРґРµРєСЃ РёСЃРєРѕРјРѕРіРѕ СЌР»РµРјРµРЅС‚Р° " << i;
+        cout << "Индекс искомого элемента " << i;
     }
     else
         {
-    while(((current->field_data) != value) && (i != count_conteiner -1))
+    while(((current->field_data) != value) && (i != size -1))
     {
         current = current->pNext;
         i++;
     }
     if(i != 0)
-    cout << "РРЅРґРµРєСЃ РёСЃРєРѕРјРѕРіРѕ СЌР»РµРјРµРЅС‚Р° " << i <<endl;
+    cout << "Индекс искомого элемента " << i <<endl;
     };
 }
 
@@ -267,9 +312,9 @@ unsigned long List::sum_values_list()
 
 unsigned long List::mid_value()
 {
-    unsigned long mid;
-    mid = sum_values_list()/count_conteiner;
-    return mid;
+    unsigned long average;
+    average = sum_values_list()/size;
+    return average;
 }
 
 unsigned long List::find_min_value()
