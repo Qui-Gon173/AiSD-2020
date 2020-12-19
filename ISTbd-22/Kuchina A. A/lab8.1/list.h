@@ -187,20 +187,16 @@ void List::delete_target_element(int target)
                 i++;
             }
         }
-        else
+       else
         {
             current = tail;
-        int i = 1;
+        int i = size;
         while (i <= size - target)
         {
             current = current->pPrevious;
-            i++;
+            i--;
         }
         }
-
-
-
-
     Node *container_for_uk;
     Node *uk_to_delete;
     container_for_uk = current;//àêêóìóëèðîâàíèå àäðåñà ñëåäóþùåãî ïîñëå óäàëåíèÿ ýëåìåíòà
