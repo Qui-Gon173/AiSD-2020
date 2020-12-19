@@ -198,6 +198,7 @@ int List::searchindex(int data)
 		current = current->pNext;
 		counter++;
 	}
+	return -1;
 }
 
 
