@@ -52,35 +52,6 @@ List::List()
 List::~List()
 {
 }
-/*unsigned long & List::operator[](const int index)
-{
-    int counter = 0;
-    Node *current = this->head;
-    while(current != nullptr)// ИСПРАВИТЬ
-    {
-        //Хрен проссышь, работает ли
-        if (counter < size/2)
-        {
-            if(counter == index){
-            return current->field_data;
-            cout << "ahead";
-        }
-        current = current->pNext;
-        counter++;
-        }
-        else
-        {
-            if(counter == index){
-            return current->field_data;
-            cout << "back" ;
-        }
-        current = current->pPrevious;
-        counter++;
-        }
-            //аж до сюда
-    }
-}*/
-
 //Методы добавления элементов
 void List::new_node(unsigned long field_data)
 {
@@ -218,17 +189,13 @@ void List::delete_target_element(int target)
         else
         {
             current = tail;
-        int i = 1;
+        int i = size;
         while (i <= size - target)
         {
             current = current->pPrevious;
-            i++;
+            i--;
         }
         }
-
-
-
-
     Node *container_for_uk;
     Node *uk_to_delete;
     container_for_uk = current;//аккумулирование адреса следующего после удаления элемента
