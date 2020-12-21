@@ -33,12 +33,12 @@ class List
     //Сумма всех значений
     unsigned int summ();
     //Среднее значение
-    unsigned int avarage();
+    unsigned int average();
     //Минимальное значение
-    unsigned int Min();
+    unsigned int min();
     //Максимальное значение
-    unsigned int Max();
-    void Add_for_generator(unsigned int data);
+    unsigned int max();
+   
 
  private:
         int Size;
@@ -77,6 +77,8 @@ unsigned int& List::operator[](const int index)
       current = current->pNext;
       count++;
    }
+   if (count == 0) 
+   cout<<"Item not found";
 }
 
 void List::push_back(unsigned int data){
@@ -217,14 +219,14 @@ unsigned int List::summ()
     return summ;
 }
 
-unsigned int List::avarage()
+unsigned int List::average()
 {
     unsigned int ava;
     ava= summ()/GetSize();
     return ava;
 }
 
-unsigned int List::Min()
+unsigned int List::min()
 {
     Node *current=this->head;
     unsigned int min = current->data;
@@ -237,7 +239,7 @@ unsigned int List::Min()
     return min;
 }
 
-unsigned int List::Max()
+unsigned int List::max()
 {
     Node *current=this->head;
     unsigned int max = current->data;
@@ -248,25 +250,4 @@ unsigned int List::Max()
        current=current->pNext;
     }
     return max;
-}
-
-void List::Add_for_generator(unsigned int data)
-{
-   if (head == NULL)
-	{
-		head = new Node(data);
-	}
-	else
-	{
-		Node *current = this->head;
-
-		while (current->pNext != NULL)
-		{
-			current = current->pNext;
-		}
-		current->pNext = new Node(data);
-
-	}
-
-	Size++; 
 }

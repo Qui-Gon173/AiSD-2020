@@ -14,7 +14,7 @@ void print(List& container){
 	}
 }
 //вывод суммы контейнера
-void Summ(List& container){
+void summ(List& container){
 	//cout<<"size: "<<container.getsize()<<endl;
 	unsigned long sum=0;
 	for(auto& item:container){
@@ -23,7 +23,7 @@ void Summ(List& container){
     cout<<"Sum: "<<sum<<endl;
 }
 //вывод среднего значения контейнера
-void Avarage(List& container){
+void average(List& container){
 	//cout<<"size: "<<container.getsize()<<endl;
 	unsigned long a=0;
 	for(auto& item:container){
@@ -34,19 +34,19 @@ void Avarage(List& container){
 }
 
 //вывод минимального значения<algorithm>
-void Min(List& container){
+void min(List& container){
     auto min=min_element(container.begin(),container.end());
     cout<<"Minimum element: "<<*min<<endl;
 }
 
 //вывод максимального значения<algorithm>
-void Max(List& container){
+void max(List& container){
     auto max=max_element(container.begin(),container.end());
     cout<<"Maximum element: "<<*max<<endl;
 }
 
 //вывод индекса минимального значения<algorithm>
-void MinIndex(List& container){
+void minIndex(List& container){
 
     auto minIn=min_element(container.begin(),container.end());
     cout<<"Minimum index element ";
@@ -54,7 +54,7 @@ void MinIndex(List& container){
 }
 
 //вывод индекса максимального значения<algorithm>
-void MaxIndex(List& container){
+void maxIndex(List& container){
 
     auto maxIn=max_element(container.begin(),container.end());
     cout<<"Maximum index element ";
@@ -65,7 +65,7 @@ void geometric(List& container,unsigned long first,unsigned long border,int fact
 	auto generator= geometric_generator(first,border,factor);
 
 	for(auto& item:generator){
-		container.Add_for_generator(item);
+		container.push_back(item);
 	}
 }
 
