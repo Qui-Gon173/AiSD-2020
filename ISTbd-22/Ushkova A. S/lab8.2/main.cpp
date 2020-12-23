@@ -1,6 +1,7 @@
 #include <iostream>
 #include <algorithm>
 #include "List.h"
+#include "List.cpp"
 #include <list>
 #include "geometric_generator.cpp"
 
@@ -50,7 +51,7 @@ void minIndex(List& container){
 
     auto minIn=min_element(container.begin(),container.end());
     cout<<"Minimum index element ";
-    container.poisk_index(*minIn);
+    container.poiskIndex(*minIn);
 }
 
 //вывод индекса максимального значения<algorithm>
@@ -58,7 +59,7 @@ void maxIndex(List& container){
 
     auto maxIn=max_element(container.begin(),container.end());
     cout<<"Maximum index element ";
-    container.poisk_index(*maxIn);
+    container.poiskIndex(*maxIn);
 }
 
 void geometric(List& container,unsigned long first,unsigned long border,int factor){
@@ -77,6 +78,7 @@ int main()
     auto container=new List;
     container->push_front(1);
     container->push_front(12);
+    auto value=(*container)[3];
     geometric(*container,2,64,2);
     print(*container);//функция, выводящая контейнер
     container->clear();//чистка контейнера
