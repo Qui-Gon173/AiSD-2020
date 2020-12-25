@@ -50,7 +50,7 @@ void max_value_index(List& container) {
 }
 
 void init_container(List& container, int first, int borderValue, int denominator) {
-	auto generator = GeomProgression(first, borderValue, denominator);
+	auto generator = ArifmProgression(first, borderValue, denominator);
 
 	for (auto& item : generator) {
 		container.append(item);

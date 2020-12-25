@@ -13,20 +13,13 @@ public:
 	ListIterator(Node* node) : node(node) {}
 	ListIterator(const ListIterator& it) : node(it.node) {}
 
-	bool operator!=(ListIterator const& other) const {
-		return node != other.node;
-	}
+	bool operator!=(ListIterator const& other) const;
 
-	bool operator==(ListIterator const& other) const {
-		return node == other.node;
-	}
+	bool operator==(ListIterator const& other) const;
 
 	typename ListIterator::reference operator*() const {
 		return node->data;
 	}
 
-	ListIterator& operator++() {
-		node = node->next;
-		return *this;
-	}
+	ListIterator& operator++();
 };

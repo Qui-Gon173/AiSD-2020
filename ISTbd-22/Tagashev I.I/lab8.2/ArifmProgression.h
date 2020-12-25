@@ -1,38 +1,26 @@
 #pragma once
 #include <algorithm>
-class GeomProgression : public std::iterator<std::input_iterator_tag, int> {
+class ArifmProgression : public std::iterator<std::input_iterator_tag, int> {
 private:
 	int* _state;
 	int _multiplier;
 	const int _seed;
 	const int _border;
 public:
-	typedef GeomProgression const_iterator;
-	GeomProgression(const int seed, const int border, int multiplier) : _seed(seed), _border(border), _multiplier(multiplier), _state(new int(seed)) {
+	typedef ArifmProgression const_iterator;
+	ArifmProgression(const int seed, const int border, int multiplier) : _seed(seed), _border(border), _multiplier(multiplier), _state(new int(seed)) {
 	}
 
-	bool operator!=(GeomProgression const& other) const
-	{
-		return *_state != *other;
-	}
+	bool operator!=(ArifmProgression const& other) const;
 
-	bool operator==(GeomProgression const& other) const
-	{
-		return *_state == *other._state;
-	}
+	bool operator==(ArifmProgression const& other) const;
 
-	typename GeomProgression::reference operator*() const
+	typename ArifmProgression::reference operator*() const
 	{
 		return *_state;
 	}
 
-	GeomProgression& operator++()
-	{
-		int prev_state = *_state;
-		delete _state;
-		_state = new int(++++_multiplier);
-		return *this;
-	}
+	ArifmProgression& operator++();
 
 	const_iterator begin() const {
 		return const_iterator(this->_seed, this->_border, this->_multiplier);
