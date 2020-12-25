@@ -123,7 +123,7 @@ void List::clear()
 	}
 }
 
-void List::poiskIndex(unsigned int value)
+void List::findByIndex(unsigned int value)
  {
      Node *current = this->head;
     int i=0;

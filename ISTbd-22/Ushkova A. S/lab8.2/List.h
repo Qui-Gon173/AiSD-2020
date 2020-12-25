@@ -27,7 +27,7 @@ class List
     //Очистить список
 	void clear();
     //Вывод индекса по определенному значению
-    void poiskIndex(unsigned int value);
+    void  findByIndex(unsigned int value);
     //Печать списка
     void printList();
     //Сумма всех значений

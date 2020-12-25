@@ -51,7 +51,7 @@ void minIndex(List& container){
 
     auto minIn=min_element(container.begin(),container.end());
     cout<<"Minimum index element ";
-    container.poiskIndex(*minIn);
+    container.findByIndex(*minIn);
 }
 
 //вывод индекса максимального значения<algorithm>
@@ -59,7 +59,7 @@ void maxIndex(List& container){
 
     auto maxIn=max_element(container.begin(),container.end());
     cout<<"Maximum index element ";
-    container.poiskIndex(*maxIn);
+    container.findByIndex(*maxIn);
 }
 
 void geometric(List& container,unsigned long first,unsigned long border,int factor){
@@ -76,9 +76,10 @@ int main()
 //    lst.push_front(3);
 //    lst.printList();
     auto container=new List;
-    container->push_front(1);
-    container->push_front(12);
-    auto value=(*container)[3];
+    container->push_back(1);
+    container->push_back(12);
+    auto value=(*container)[2];
+    //cout<<value<<endl;
     geometric(*container,2,64,2);
     print(*container);//функция, выводящая контейнер
     container->clear();//чистка контейнера
