@@ -12,8 +12,6 @@ bool ArifmProgression::operator==(ArifmProgression const& other) const
 
 ArifmProgression& ArifmProgression::operator++()
 {
-	int prev_state = *_state;
-	delete _state;
-	*_state += _multiplier;
+	*_state += _multiplier * 4;
 	return *this;
 }

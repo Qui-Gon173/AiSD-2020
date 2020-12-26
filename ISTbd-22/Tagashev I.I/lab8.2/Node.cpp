@@ -2,8 +2,6 @@
 
 Node::Node(int data, Node* prev, Node* next)
 {
-	prev = nullptr;
-	next = nullptr;
 	this->data = data;
 	this->next = next;
 	this->prev = prev;
