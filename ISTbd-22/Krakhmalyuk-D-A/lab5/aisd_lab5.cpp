@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <ctime>
 #include <fstream>
 #include <string>
@@ -172,3 +172,4 @@ int main()
 	printFile(filename);
 
 	return EXIT_SUCCESS;
+}

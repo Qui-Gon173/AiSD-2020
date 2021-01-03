@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1608290107 source:c:\users\de56\desktop\Ñ++_labs\laba_5_ver2\main.cpp
+	<algorithm>
+	<cstddef>
+	<iterator>
+	<windows.h>
+	<memory>
+	<iostream>
+	<fstream>
+
