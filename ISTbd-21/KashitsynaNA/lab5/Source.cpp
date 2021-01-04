@@ -2,7 +2,7 @@
 #include <fstream>
 using namespace std;
 
-//Сортировка методом простого слияния
+//РЎРѕСЂС‚РёСЂРѕРІРєР° РјРµС‚РѕРґРѕРј РїСЂРѕСЃС‚РѕРіРѕ СЃР»РёСЏРЅРёСЏ
 void sliyanieSort(char* nazvanie);
 
 int main()
@@ -10,38 +10,38 @@ int main()
 	setlocale(LC_ALL, "rus");
 	char nazvanie[] = "Array.txt";
 	sliyanieSort(nazvanie);
-	cout << "Сортировка успешно завершена";
+	cout << "РЎРѕСЂС‚РёСЂРѕРІРєР° СѓСЃРїРµС€РЅРѕ Р·Р°РІРµСЂС€РµРЅР°";
 	return 0;
 }
 
 
 void sliyanieSort(char* nazvanie)
 {
-	int first, second; //Вспомогательные числа
+	int first, second; //Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Рµ С‡РёСЃР»Р°
 	int k = 1, i, j, size = -1;
 	fstream fs;
-	fstream fs_first, fs_second; //Вспомогательные файлы
+	fstream fs_first, fs_second; //Р’СЃРїРѕРјРѕРіР°С‚РµР»СЊРЅС‹Рµ С„Р°Р№Р»С‹
 	fs.open(nazvanie, fstream::in);
 
 	while (fs) 
 	{
 		fs >> first;
-		size++; //Количество чисел
+		size++; //РљРѕР»РёС‡РµСЃС‚РІРѕ С‡РёСЃРµР»
 	}
 	fs.close();
 
 	while (k < size)
 	{
-		fs.open(nazvanie, fstream::in); //Читаю поток ввода
+		fs.open(nazvanie, fstream::in); //Р§РёС‚Р°СЋ РїРѕС‚РѕРє РІРІРѕРґР°
 		fs_first.open("first.txt", fstream::out);
-		fs_second.open("second.txt", fstream::out); //Открываю потоки вывода
+		fs_second.open("second.txt", fstream::out); //РћС‚РєСЂС‹РІР°СЋ РїРѕС‚РѕРєРё РІС‹РІРѕРґР°
 
 		if (fs) 
 		{  
-			fs >> first; //Читаю первое число
+			fs >> first; //Р§РёС‚Р°СЋ РїРµСЂРІРѕРµ С‡РёСЃР»Рѕ
 		}
 
-		while (fs) //Делю на пары
+		while (fs) //Р”РµР»СЋ РЅР° РїР°СЂС‹
 		{
 			for (i = 0; i < k && fs; i++) {
 				fs_first << first << " ";
@@ -54,13 +54,13 @@ void sliyanieSort(char* nazvanie)
 		}
 		fs.close();
 		fs_first.close();
-		fs_second.close(); //Закрываю потоки
+		fs_second.close(); //Р—Р°РєСЂС‹РІР°СЋ РїРѕС‚РѕРєРё
 
 		fs.open(nazvanie, fstream::out);
 		fs_first.open("first.txt", fstream::in);
 		fs_second.open("second.txt", fstream::in);
 		if (fs_first) {
-			fs_first >> first; //Читаю числа
+			fs_first >> first; //Р§РёС‚Р°СЋ С‡РёСЃР»Р°
 		}
 		if (fs_second) {
 			fs_second >> second;
@@ -70,7 +70,7 @@ void sliyanieSort(char* nazvanie)
 			i = 0;
 			j = 0;
 
-			while ((i < k) && (j < k) && (fs_first && fs_second)) { //Обмен элементов
+			while ((i < k) && (j < k) && (fs_first && fs_second)) { //РћР±РјРµРЅ СЌР»РµРјРµРЅС‚РѕРІ
 				if (first < second) {
 					fs << first << " ";
 					fs_first >> first;
@@ -83,7 +83,7 @@ void sliyanieSort(char* nazvanie)
 				}
 			}
 
-			while (i < k && fs_first) { //Добавляю оставшиеся сортируемые элменты
+			while (i < k && fs_first) { //Р”РѕР±Р°РІР»СЏСЋ РѕСЃС‚Р°РІС€РёРµСЃСЏ СЃРѕСЂС‚РёСЂСѓРµРјС‹Рµ СЌР»РјРµРЅС‚С‹
 				fs << first << " ";
 				fs_first >> first;
 				i++;
@@ -95,7 +95,7 @@ void sliyanieSort(char* nazvanie)
 			}
 		}
 
-		while (fs_first) { //Добавляю оставшиеся неотсортированные элементы
+		while (fs_first) { //Р”РѕР±Р°РІР»СЏСЋ РѕСЃС‚Р°РІС€РёРµСЃСЏ РЅРµРѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅС‹Рµ СЌР»РµРјРµРЅС‚С‹
 			fs << first << " ";
 			fs_first >> first;
 
