@@ -1,30 +1,30 @@
 #include <iostream>
 using namespace std;
 
-//Функция перемещения одного кольца
+//Р¤СѓРЅРєС†РёСЏ РїРµСЂРµРјРµС‰РµРЅРёСЏ РѕРґРЅРѕРіРѕ РєРѕР»СЊС†Р°
 void moving(char firstPoint, char secondPoint);
-//Функция перемещения всей башни
+//Р¤СѓРЅРєС†РёСЏ РїРµСЂРµРјРµС‰РµРЅРёСЏ РІСЃРµР№ Р±Р°С€РЅРё
 void towerMoving(int count, char firstPoint, char secondPoint, char freePoint);
 
 int main()
 {
 	setlocale(LC_ALL, "rus");
 	int count;
-	cout << "Ханойские башни. Всего 3 стержня - А, Б, В." << endl << "Перемещаем башню со стержня А на стержень Б." << endl;
-	cout << "Введите количество колец: "; cin >> count;
-	cout << endl << "Алгоритм:" << endl;
-	towerMoving(count, 'А', 'Б', 'В');
+	cout << "РҐР°РЅРѕР№СЃРєРёРµ Р±Р°С€РЅРё. Р’СЃРµРіРѕ 3 СЃС‚РµСЂР¶РЅСЏ - Рђ, Р‘, Р’." << endl << "РџРµСЂРµРјРµС‰Р°РµРј Р±Р°С€РЅСЋ СЃРѕ СЃС‚РµСЂР¶РЅСЏ Рђ РЅР° СЃС‚РµСЂР¶РµРЅСЊ Р‘." << endl;
+	cout << "Р’РІРµРґРёС‚Рµ РєРѕР»РёС‡РµСЃС‚РІРѕ РєРѕР»РµС†: "; cin >> count;
+	cout << endl << "РђР»РіРѕСЂРёС‚Рј:" << endl;
+	towerMoving(count, 'Рђ', 'Р‘', 'Р’');
 	return 0;
 }
 
 void moving(char firstPoint, char secondPoint)
 {
-	cout << "Из стержня " << firstPoint << " в стержень " << secondPoint << endl;
+	cout << "РР· СЃС‚РµСЂР¶РЅСЏ " << firstPoint << " РІ СЃС‚РµСЂР¶РµРЅСЊ " << secondPoint << endl;
 }
 
 void towerMoving(int count, char firstPoint, char secondPoint, char freePoint)
 {
-	if (count == 0) { return; } //Если количество дисков равно 0, то выхожу из функции
+	if (count == 0) { return; } //Р•СЃР»Рё РєРѕР»РёС‡РµСЃС‚РІРѕ РґРёСЃРєРѕРІ СЂР°РІРЅРѕ 0, С‚Рѕ РІС‹С…РѕР¶Сѓ РёР· С„СѓРЅРєС†РёРё
 
 	towerMoving(count - 1, firstPoint, freePoint, secondPoint);
 	moving(firstPoint, secondPoint);
