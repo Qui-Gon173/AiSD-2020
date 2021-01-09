@@ -36,9 +36,5 @@ public:
         return *this;
     };
 
-    /*long ret_dat()
-    {
-        return p->data_return();
-    }*/
 };
 
