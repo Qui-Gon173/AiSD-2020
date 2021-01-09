@@ -4,7 +4,7 @@
 
 class Elem
 {
-	long data; // данные экземпляра
+	long data; // РґР°РЅРЅС‹Рµ СЌРєР·РµРјРїР»СЏСЂР°
 	Elem* Next;
 	friend class List;
 
