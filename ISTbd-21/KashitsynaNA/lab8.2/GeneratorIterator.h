@@ -7,7 +7,7 @@ class GeneratorIterator : public std::iterator<std::input_iterator_tag, long>
 {
     long b1, q;
     int n;
-    long* bn; // n-ый член последовательности
+    long* bn; // n-С‹Р№ С‡Р»РµРЅ РїРѕСЃР»РµРґРѕРІР°С‚РµР»СЊРЅРѕСЃС‚Рё
 public:
 
     GeneratorIterator(long first, long znamenatel, int kol)
