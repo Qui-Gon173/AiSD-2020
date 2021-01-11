@@ -1,67 +1,59 @@
 #include <iostream>
 
-using namespace std;
-
-
-int parent(int i) {
-	return i / 2;
+void filling_array(int* array, int n) {
+	std::cout << "Filling Array:\n";
+	for (int i = 0; i < n; i++) {
+		std::cin >> array[i];
+	}
+	std::cout << std::endl;
 }
 
-int left(int i) {
-	return (2 * i + 1);
-}
 
-int right(int i) {
-	return (2 * i + 2);
-}
+void heapify(int arr[], int n, int i) {
+	int largest = i;
+	int l = 2 * i + 1; //���
+	int r = 2 * i + 2; //����
 
-void max_heapify(int array[], int size, int i) {
-	int l = left(i);
-	int r = right(i);
-	int largest = 0;
-	if (l < size && array[l] > array[i])
+	if (l < n && arr[l] > arr[largest]) {
 		largest = l;
-	else largest = i;
-	if (r < size && array[r] > array[largest])
+	}
+	if (r < n && arr[r] > arr[largest]) {
 		largest = r;
-	if (largest != i) {
-		array[i] += array[largest];
-		array[largest] = array[i] - array[largest];
-		array[i] -= array[largest];
-		max_heapify(array, size, largest);
+	}
+	if (largest != i)
+	{
+		std::swap(arr[i], arr[largest]);
+		heapify(arr, n, largest);
 	}
 }
 
-void build_max_heap(int array[], int size) {
-	for (int i = size / 2; i >= 0; --i) {
-		max_heapify(array, size, i);
+void heapSort(int arr[], int n) {
+	//������ �����
+	for (int i = n / 2 - 1; i >= 0; i--) {
+		heapify(arr, n, i);
+	}
+	//��������� �����
+	for (int i = n - 1; i >= 0; i--) {
+		std::swap(arr[0], arr[i]);
+		heapify(arr, i, 0);
 	}
 }
 
-void heap_sort(int array[], int size) {
-	build_max_heap(array, size);
-	for (int i = size - 1; i >= 0; --i) {
-		array[i] += array[0];
-		array[0] = array[i] - array[0];
-		array[i] -= array[0];
-		size -= 1;
-		max_heapify(array, size, 0);
+void cout_array(int* array, int n) {
+	std::cout << "Sorted array:\n";
+	for (int i = 0; i < n; i++) {
+		std::cout << array[i] << " ";
 	}
+	std::cout << std::endl;
 }
 
-int main() {
-	setlocale(LC_ALL, "Russian");
-	int size = 0;
-	cout << "Введите размер массива: ";
-	cin >> size;
-	int array[50] = {};
-	cout << "Введите элементы массива: ";
-	for (int i = 0; i != size; ++i)
-		cin >> array[i];
-	cout << "Введите элементы массива: ";
-	heap_sort(array, size);
-	for (int i = 0; i != size; ++i)
-		cout << array[i] << ' ';
-	cout << "\n";
-	return 0;
+int main()
+{
+	int* my_array = new int[50];
+	int count;
+	std::cout << "Enter the number of values: ";
+	std::cin >> count;
+	filling_array(my_array, count);
+	heapSort(my_array, count);
+	cout_array(my_array, count);
 }
