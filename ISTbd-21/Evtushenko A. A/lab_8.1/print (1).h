@@ -1,15 +1,18 @@
 #pragma once
-#include "Header.h"
+#include "stack.h"
+using namespace std;
+
 template <typename T>
+
 void Stack<T>::print()
 {
     for (int i = index - 1; i >= 0; i--)
-        std::cout << stackPtr[i] << " ";
-    std::cout << std::endl;
+        cout << pStack[i] << " ";
+    cout << endl;
 }
 
 template <class T>
 void Stack<T>::print_top_stack() const
 {
-    std::cout << stackPtr[index];
+    cout << pStack[index];
 }
