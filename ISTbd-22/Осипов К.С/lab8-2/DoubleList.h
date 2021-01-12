@@ -9,6 +9,22 @@ template <typename T>
 class ListIterator;
 
 template <typename T>
+struct Node
+{
+    friend class ListIterator<T>;
+
+    Node* ptr_next;
+    Node* ptr_prev;
+    T data;
+    Node(T data = T(), Node* ptr_next = nullptr, Node* ptr_prev = nullptr)
+    {
+        this->data = data;
+        this->ptr_next = ptr_next;
+        this->ptr_prev = ptr_prev;
+    }
+};
+
+template <typename T>
 class DoubleList
 {
 public:
@@ -47,21 +63,7 @@ public:
 
 private:
 
-    template <typename T>
-    struct Node
-    {
-        friend class ListIterator<T>;
-
-        Node* ptr_next;
-        Node* ptr_prev;
-        T data;
-        Node(T data = T(), Node* ptr_next = nullptr, Node* ptr_prev = nullptr)
-        {
-            this->data = data;
-            this->ptr_next = ptr_next;
-            this->ptr_prev = ptr_prev;
-        }
-    };
+    // тут была структура узла //
 
     Node<T>* head;
     Node<T>* tail;
