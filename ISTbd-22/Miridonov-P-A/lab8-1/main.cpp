@@ -81,10 +81,10 @@ void List::NewNode(unsigned int field_data)
         }//≈сли более, чем второй
         else
         {
-        Node *conteiner_for_uk;
+        Node *container_for_uk;
         Node *current_this;//указатель на создаваемый элемент
-        conteiner_for_uk = current->pNext;//помещение в контейнер указател€ на следующий элемент головы
-        current->pNext = new Node(field_data,head,conteiner_for_uk);//создание нового узла
+        container_for_uk = current->pNext;//помещение в контейнер указател€ на следующий элемент головы
+        current->pNext = new Node(field_data,head,container_for_uk);//создание нового узла
         current = current->pNext;//переключение на след. узел
         current_this = current;//аккумулирование адреса этого узла дл€ вывода и проверки
         current = current->pNext;//переключение на узел, где нужно сменить указатель на предыдущий
@@ -92,12 +92,12 @@ void List::NewNode(unsigned int field_data)
         cout << "Ѕыл создан элемент: " << " јдрес предыдущего элемента = " << head;
         cout << "; адрес этого элемента = " << current_this;
         cout << "; »нформаци€ = " << field_data;
-        cout << "; адрес следующего элемента:" << conteiner_for_uk << ";" << endl;
+        cout << "; адрес следующего элемента:" << container_for_uk << ";" << endl;
         }
     }
     size++;
 }
-void List::CreateNodeInTargetPlace(int place, unsigned int field_data)
+void List::CreateNodeInTargetPlace(int place, unsigned int field_data) // FIX
 {
     Node *current = this->head;
     int i = 0;
@@ -108,18 +108,32 @@ void List::CreateNodeInTargetPlace(int place, unsigned int field_data)
     }
     else
     {
-    while(place - i != 1)
+    if (place<=size/2)
     {
-        current = current->pNext;
-        i++;
-    };
-    Node *conteiner_for_uk;
-    conteiner_for_uk = current->pNext;//аккумулирование указател€
-    current->pNext = new Node(field_data, current, conteiner_for_uk);//создание узла под выбранным номером
+        current = head;
+        int i = 1;
+        while(i<place)
+        {
+            current = current ->pNext;
+            i++;
+        }
+    }
+    else
+    {
+        current = tail;
+        int i = 1;
+        while (i<=size-place)
+        {
+            current = current -> pPrevious;
+        }
+    }
+    Node *container_for_uk;
+    container_for_uk = current->pNext;//аккумулирование указател€
+    current->pNext = new Node(field_data, current, container_for_uk);//создание узла под выбранным номером
     current = current->pNext;//перемещение узла
-    conteiner_for_uk = current;//аккумулирование его адреса
+    container_for_uk = current;//аккумулирование его адреса
     current = current->pNext;//перемещение на элемент, сто€щий после созданного
-    current->pPrevious=conteiner_for_uk;//исправление указател€ на предыдущий
+    current->pPrevious=container_for_uk;//исправление указател€ на предыдущий
     };
     size++;
     cout << "Ёлемент добавлен" << endl;
@@ -150,7 +164,7 @@ void List::PrintListBack()
 }
 
 //”дал€ющие методы
-void List::DeleteTargetedElement(int target)
+void List::DeleteTargetedElement(int target) //FIX
 {
     Node *current = this->head;
     int i = 0;
@@ -162,11 +176,26 @@ void List::DeleteTargetedElement(int target)
     }
     if(target > 0 && target < (size - 1))
     {
-    while(i - target != 1)
-    {
-        current = current->pNext;
-        i++;
-    };
+        if (target <= size/2)
+        {
+            current = head;
+            int i = 1;
+            while (i<target)
+            {
+                current = current -> pNext;
+                i++;
+            }
+        }
+        else
+        {
+            current = tail;
+            int i = 1;
+            while (i <= size-target)
+            {
+                current = current -> pPrevious;
+                i++;
+            }
+        }
     Node *container_for_uk;
     Node *uk_to_delete;
     container_for_uk = current;//аккумулирование адреса следующего после удалени€ элемента
@@ -178,13 +207,13 @@ void List::DeleteTargetedElement(int target)
     current = current->pNext;//переход на элемент после удал€емого по обновленному пути
     current->pPrevious = container_for_uk;//переназначение указател€ на предыдущий с удал€емого элемента
     delete uk_to_delete;
-    };
-    if(target == (size -1))
+    }
+    else
         {
         current = tail;
         tail = tail->pPrevious;
         delete current;
-    }
+        }
     size--;
 
     cout << "Ёлемент удален" << endl;
