@@ -1,14 +1,16 @@
 #pragma once
+
+typedef unsigned char long_t;
+
+
 class Node
 {
-	friend class _iterator;
 public:
-	Node* pNext;
-	unsigned long data;
 
-	Node(unsigned long data = unsigned long(), Node* pNext = nullptr)
-	{
-		this->data = data;
-		this->pNext = pNext;
-	}
+    Node* pNext;
+    long_t data;
+    Node(long_t data = 0, Node* pNext = nullptr) {
+        this->data = data;
+        this->pNext = pNext;
+    }
 };
